@@ -17,36 +17,46 @@
    <string>Arduino Controller</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="mainTab">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>40</y>
-      <width>1001</width>
-      <height>601</height>
+      <width>981</width>
+      <height>571</height>
      </rect>
     </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
     <widget class="QWidget" name="gpio">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>GPIO</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="func_gen">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Function Gen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="statusTip">
+      <string/>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="accessibleName">
+      <string/>
+     </property>
+     <attribute name="title">
+      <string>Func Gen</string>
      </attribute>
     </widget>
     <widget class="QWidget" name="wired">
      <attribute name="title">
-      <string>Tab 2</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="func_gen">
-     <attribute name="title">
-      <string>Page</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string>Page</string>
+      <string>Wired Protocols</string>
      </attribute>
     </widget>
    </widget>
