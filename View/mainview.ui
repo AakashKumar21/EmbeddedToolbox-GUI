@@ -83,31 +83,38 @@
     <property name="title">
      <string>Connection</string>
     </property>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QWidget" name="horizontalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>50</y>
-       <width>80</width>
-       <height>25</height>
+       <x>600</x>
+       <y>30</y>
+       <width>251</width>
+       <height>71</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Disconnect</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comPortSelect">
-     <property name="geometry">
-      <rect>
-       <x>770</x>
-       <y>50</y>
-       <width>75</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="editable">
-      <bool>false</bool>
-     </property>
+     <layout class="QHBoxLayout" name="grp_connection">
+      <item>
+       <widget class="QPushButton" name="btn_connect">
+        <property name="text">
+         <string>Connect</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_disconnect">
+        <property name="text">
+         <string>Disconnect</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comPortSelect">
+        <property name="editable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
   </widget>
