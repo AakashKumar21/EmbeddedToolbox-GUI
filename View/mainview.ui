@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>768</height>
+    <width>929</width>
+    <height>721</height>
    </rect>
   </property>
   <property name="mouseTracking">
@@ -20,10 +20,10 @@
    <widget class="QTabWidget" name="mainTab">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>981</width>
-      <height>571</height>
+      <x>30</x>
+      <y>20</y>
+      <width>871</width>
+      <height>541</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -36,10 +36,21 @@
      <attribute name="title">
       <string>GPIO</string>
      </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>851</width>
+        <height>491</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="loTabGpio"/>
+     </widget>
     </widget>
     <widget class="QWidget" name="func_gen">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Function Gen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string/>
      </property>
      <property name="statusTip">
       <string/>
@@ -51,7 +62,7 @@
       <string/>
      </property>
      <attribute name="title">
-      <string>Func Gen</string>
+      <string>Analog Inputs</string>
      </attribute>
     </widget>
     <widget class="QWidget" name="wired">
@@ -60,16 +71,45 @@
      </attribute>
     </widget>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1024</width>
-     <height>25</height>
-    </rect>
-   </property>
+   <widget class="QGroupBox" name="setupBox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>580</y>
+      <width>871</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Connection</string>
+    </property>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>50</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Disconnect</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comPortSelect">
+     <property name="geometry">
+      <rect>
+       <x>770</x>
+       <y>50</y>
+       <width>75</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="editable">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

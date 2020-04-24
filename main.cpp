@@ -1,4 +1,4 @@
-#include "mainview.h"
+#include "View/mainview.h"
 
 #include <QApplication>
 

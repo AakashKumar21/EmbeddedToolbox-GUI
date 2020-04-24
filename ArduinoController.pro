@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,13 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainview.cpp
+    View\mainview.cpp \
+    View\tab_gpio.cpp
 
 HEADERS += \
-    mainview.h
+    View\mainview.h \
+    View\tab_gpio.h
 
 FORMS += \
-    mainview.ui
+    View\mainview.ui \
+    View\tab_gpio.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
