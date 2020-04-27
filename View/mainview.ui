@@ -23,7 +23,7 @@
       <x>30</x>
       <y>20</y>
       <width>871</width>
-      <height>541</height>
+      <height>671</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -42,7 +42,7 @@
         <x>10</x>
         <y>10</y>
         <width>851</width>
-        <height>491</height>
+        <height>611</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="loTabGpio"/>
@@ -70,51 +70,21 @@
       <string>Wired Protocols</string>
      </attribute>
     </widget>
-   </widget>
-   <widget class="QGroupBox" name="setupBox">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>580</y>
-      <width>871</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Connection</string>
-    </property>
-    <widget class="QWidget" name="horizontalLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>600</x>
-       <y>30</y>
-       <width>251</width>
-       <height>71</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="grp_connection">
-      <item>
-       <widget class="QPushButton" name="btn_connect">
-        <property name="text">
-         <string>Connect</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_disconnect">
-        <property name="text">
-         <string>Disconnect</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comPortSelect">
-        <property name="editable">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Setup</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>831</width>
+        <height>461</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="loSetupTab"/>
+     </widget>
     </widget>
    </widget>
   </widget>
