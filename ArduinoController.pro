@@ -20,6 +20,8 @@ SOURCES += \
     View\mainview.cpp \
     View\tab_gpio.cpp \
     View\tab_setup.cpp \
+    serial.cpp \
+    settings.cpp \
     startup.cpp \
     utils.cpp
 
@@ -27,6 +29,8 @@ HEADERS += \
     View\mainview.h \
     View\tab_gpio.h \
     View\tab_setup.h \
+    serial.h \
+    settings.h \
     startup.h \
     utils.h
 

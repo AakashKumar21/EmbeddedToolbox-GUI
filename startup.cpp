@@ -14,8 +14,9 @@ void Startup::show() const
     m_mainView->show();
 }
 
+
 Startup::~Startup()
 {
+    Utils::DestructorMsg(*this);
     delete &m_mainView;
-//    m_mainView->~MainView();
 }

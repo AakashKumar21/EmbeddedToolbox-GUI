@@ -1,6 +1,7 @@
 #include "tab_gpio.h"
 #include "ui_tab_gpio.h"
 #include <QDebug>
+#include "utils.h"
 
 TabGpio::TabGpio(QWidget *parent) :
     QWidget(parent),
@@ -11,5 +12,6 @@ TabGpio::TabGpio(QWidget *parent) :
 
 TabGpio::~TabGpio()
 {
+    Utils::DestructorMsg(*this);
     delete ui;
 }

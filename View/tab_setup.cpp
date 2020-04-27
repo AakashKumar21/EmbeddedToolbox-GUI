@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <Windows.h>
 #include <QElapsedTimer>
+#include "utils.h"
+#include "serial.h"
 
 
 TabSetup::TabSetup(QWidget *parent) :
@@ -15,17 +17,17 @@ TabSetup::TabSetup(QWidget *parent) :
     ui(new Ui::tab_setup)
 {
     ui->setupUi(this);
-    auto m_ports = QSerialPortInfo::availablePorts();
-    QSerialPort serial;
-
-    QStringList ports;
-    for(auto &y: m_ports)
-    {
-        ui->comPortSelect->addItem(y.portName());
-    }
 }
 
 TabSetup::~TabSetup()
 {
+    Utils::DestructorMsg(*this);
     delete ui;
+}
+
+void TabSetup::on_btn_refresh_port_clicked()
+{
+    ui->comPortSelect->clear();
+    ui->comPortSelect->addItems(Serial::getComPortList());
+    ui->comPortSelect->showPopup();
 }

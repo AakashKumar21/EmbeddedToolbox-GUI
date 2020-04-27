@@ -1,5 +1,6 @@
 #include "View/mainview.h"
-#include <QDebug>
+#include <utils.h>
+// BUG : IDK WHY DESTRUCTOR IS NOT CALLING AS THE FUNC "DestructorMsg" IS NOT EXECUTING
 
 MainView::MainView(QWidget *parent, TabSetup &setup, TabGpio &gpio)
     : QMainWindow(parent),
@@ -19,6 +20,7 @@ MainView::MainView(QWidget *parent, TabSetup &setup, TabGpio &gpio)
 
 MainView::~MainView()
 {
+    Utils::DestructorMsg(*this);
     delete ui;
 }
 
