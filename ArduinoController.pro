@@ -18,15 +18,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     View\mainview.cpp \
-    View\tab_gpio.cpp
+    View\tab_gpio.cpp \
+    View\tab_setup.cpp
 
 HEADERS += \
     View\mainview.h \
-    View\tab_gpio.h
+    View\tab_gpio.h \
+    View\tab_setup.h
 
 FORMS += \
     View\mainview.ui \
-    View\tab_gpio.ui
+    View\tab_gpio.ui \
+    View\tab_setup.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
