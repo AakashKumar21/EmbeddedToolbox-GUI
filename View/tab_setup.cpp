@@ -17,7 +17,6 @@ TabSetup::TabSetup(QWidget *parent) :
     ui->setupUi(this);
     auto m_ports = QSerialPortInfo::availablePorts();
     QSerialPort serial;
-    QElapsedTimer timer;
 
     QStringList ports;
     for(auto &y: m_ports)
