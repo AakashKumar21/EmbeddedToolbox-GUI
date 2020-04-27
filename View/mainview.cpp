@@ -1,4 +1,5 @@
 #include "View/mainview.h"
+#include <QDebug>
 
 MainView::MainView(QWidget *parent, TabSetup &setup, TabGpio &gpio)
     : QMainWindow(parent),

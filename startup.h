@@ -12,6 +12,7 @@ class Startup final: public QObject
 public:
     explicit Startup();
     void show() const;
+    ~Startup();
 
 private:
     TabSetup *m_tabSetup;

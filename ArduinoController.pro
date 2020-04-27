@@ -20,13 +20,15 @@ SOURCES += \
     View\mainview.cpp \
     View\tab_gpio.cpp \
     View\tab_setup.cpp \
-    startup.cpp
+    startup.cpp \
+    utils.cpp
 
 HEADERS += \
     View\mainview.h \
     View\tab_gpio.h \
     View\tab_setup.h \
-    startup.h
+    startup.h \
+    utils.h
 
 FORMS += \
     View\mainview.ui \
