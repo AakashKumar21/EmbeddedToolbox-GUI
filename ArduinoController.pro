@@ -30,6 +30,7 @@ HEADERS += \
     View\tab_gpio.h \
     View\tab_setup.h \
     serial.h \
+    serialcommands.h \
     settings.h \
     startup.h \
     utils.h
