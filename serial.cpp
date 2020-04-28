@@ -13,10 +13,44 @@ Serial* Serial::getInstance() {
    return(_instance);
 }
 
+void Serial::Write(char cmd)
+{
+
+}
+
+void Serial::Write(char cmd, char ins)
+{
+    qDebug() << "Going to write " << static_cast<int>(cmd) <<' ' << static_cast<int>(ins) << '\n';
+    if(m_qSerialPort->isWritable())
+    {
+        qDebug() << "Port Open, Writing\n";
+        QByteArray arr;
+        arr.append(cmd); arr.append(ins);
+        m_qSerialPort->write(arr);
+        if(m_qSerialPort->error() == 0)
+        {
+            qDebug() << "Success\n";
+        }
+        else
+        {
+            qDebug() << m_qSerialPort->error();
+        }
+    }
+}
+
+
 Serial::Serial(QObject *parent) :
     QObject(parent)
 {
     m_findComPort();
+}
+
+Serial::~Serial()
+{
+    if(_instance != nullptr){
+        _instance->End();
+    }
+    delete _instance;
 }
 
 void Serial::setPort(int port_index)

@@ -5,9 +5,7 @@
 #include <QSerialPortInfo>
 #include <QSerialPort>
 
-
 // This in singleton class
-
 class Serial : public QObject
 {
     Q_OBJECT
@@ -16,7 +14,9 @@ public:
     static Serial* getInstance();
 
     QSerialPort::SerialPortError sendReset();
-    QSerialPort::SerialPortError Write();
+    void Write(char cmd);
+    void Write(char cmd, char ins);
+    void Write(char cmd, char ins, char);
     QSerialPort::SerialPortError getInfo() const; //  Will return SerialInfo including connected/disconnected
     void setPort(int port_index); // index of QList<QSerialPortInfo>
     QSerialPort::SerialPortError Begin(enum QSerialPort::BaudRate);
@@ -36,6 +36,7 @@ private:
     explicit Serial(QObject *parent = nullptr);
     Serial(const Serial&);
     Serial& operator=(const Serial&);
+    ~Serial();
 
     QSerialPortInfo m_portInfo;
     QSerialPort *m_qSerialPort;
