@@ -11,8 +11,6 @@ MainView::MainView(QWidget *parent, TabSetup &setup, TabGpio &gpio)
     ui->setupUi(this);
     m_tabSetup.setParent(this);
     m_tabGpio.setParent(this);
-//    auto tab_gpio = new TabGpio(this);
-//    auto tab_setup = new TabSetup(this);
     ui->loTabGpio->addWidget(&m_tabGpio);
     ui->loSetupTab->addWidget(&m_tabSetup);
 }
