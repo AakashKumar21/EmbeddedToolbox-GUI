@@ -6,11 +6,15 @@
 #include <QSerialPort>
 
 
+// This in singleton class
+
 class Serial : public QObject
 {
     Q_OBJECT
 public:
-    explicit Serial(QObject *parent);
+
+    static Serial* getInstance();
+
     QSerialPort::SerialPortError sendReset();
     QSerialPort::SerialPortError Write();
     QSerialPort::SerialPortError getInfo() const; //  Will return SerialInfo including connected/disconnected
@@ -28,6 +32,11 @@ private slots:
 //    void onDisconnected();
 
 private:
+    static Serial* _instance;
+    explicit Serial(QObject *parent = nullptr);
+    Serial(const Serial&);
+    Serial& operator=(const Serial&);
+
     QSerialPortInfo m_portInfo;
     QSerialPort *m_qSerialPort;
     static QList<QSerialPortInfo> m_serialPortList;

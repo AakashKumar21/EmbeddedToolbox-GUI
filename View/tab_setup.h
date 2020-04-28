@@ -28,7 +28,7 @@ private slots:
 
 private:
     Ui::tab_setup *ui;
-    Serial m_serialConn;
+    Serial &m_serialConn;
 };
 
 #endif // TAB_SETUP_H

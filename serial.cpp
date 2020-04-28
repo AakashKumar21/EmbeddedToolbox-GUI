@@ -2,6 +2,16 @@
 #include <QDebug>
 
 QList<QSerialPortInfo> Serial::m_serialPortList = QSerialPortInfo::availablePorts();
+Serial* Serial::_instance = nullptr;
+
+
+Serial* Serial::getInstance() {
+   if (_instance == nullptr)
+   {
+      _instance = new Serial();
+   }
+   return(_instance);
+}
 
 Serial::Serial(QObject *parent) :
     QObject(parent)

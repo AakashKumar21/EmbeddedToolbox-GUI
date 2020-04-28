@@ -1,21 +1,17 @@
 #include "tab_setup.h"
 #include "ui_tab_setup.h"
+#include "utils.h"
+#include "serial.h"
 
 #include <QSerialPortInfo>
 #include <QDebug>
-#include <iostream>
 #include <QSerialPort>
-#include <QDebug>
-#include <Windows.h>
-#include <QElapsedTimer>
-#include "utils.h"
-#include "serial.h"
-#include <QDebug>
+
 
 TabSetup::TabSetup(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::tab_setup),
-    m_serialConn(this)
+    m_serialConn(*Serial::getInstance())
 {
     ui->setupUi(this);
     ui->btn_disconnect->setDisabled(true);
@@ -43,9 +39,8 @@ void TabSetup::on_comPortSelect_activated(int index)
 
 void TabSetup::on_btn_connect_clicked()
 {
-    QSerialPort::SerialPortError err;
     qDebug() << "Connnecting";
-    err = m_serialConn.Begin(QSerialPort::Baud115200); // Connection begins
+    auto err = m_serialConn.Begin(QSerialPort::Baud115200); // Connection begins
     if(err == 0)
     {
         qDebug() << "Connection Success\n";
