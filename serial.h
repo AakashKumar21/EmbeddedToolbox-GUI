@@ -10,12 +10,14 @@ class Serial : public QObject
 {
     Q_OBJECT
 public:
-    explicit Serial(QObject *parent, QSerialPortInfo &port_info);
+    explicit Serial(QObject *parent);
     QSerialPort::SerialPortError sendReset();
     QSerialPort::SerialPortError Write();
     QSerialPort::SerialPortError getInfo() const; //  Will return SerialInfo including connected/disconnected
-    static QStringList getComPortList(); // Returns list of COM ports to be added to drop down menu
-
+    void setPort(int port_index); // index of QList<QSerialPortInfo>
+    QSerialPort::SerialPortError Begin(enum QSerialPort::BaudRate);
+    void End();
+    static QStringList getComPortList();//CONST // Returns list of COM ports to be added to drop down menu
 
 signals:
 //    void NotifyConnected();
@@ -26,8 +28,10 @@ private slots:
 //    void onDisconnected();
 
 private:
-    QSerialPortInfo &m_portInfo;
-    void m_findComPorts();
+    QSerialPortInfo m_portInfo;
+    QSerialPort *m_qSerialPort;
+    static QList<QSerialPortInfo> m_serialPortList;
+    static void m_findComPort();
 
 signals:
 
