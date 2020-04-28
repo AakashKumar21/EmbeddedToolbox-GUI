@@ -3,21 +3,23 @@
 
 namespace Inst {  // Inst for instruction
     enum OP{
-        PinMode_Low,
-        PinMode_High,
+        PinMode_In,
+        PinMode_Out,
         PullUp_True,
         PullUp_False,
         PullDown_True,
-        PullDown_False
+        PullDown_False,
+        PinLow,
+        PinHigh
     };
     enum TARGET{
-        D8 = static_cast<short int>(64),
+        D8 = static_cast<char>(32),
         D9,
         D10,
         D11,
         D12,
         D13,
-        D0 = static_cast<short int>(32),
+        D0 = static_cast<char>(128),
         D1,
         D2,
         D3,

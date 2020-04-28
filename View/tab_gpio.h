@@ -2,6 +2,7 @@
 #define TAB_GPIO_H
 
 #include <QWidget>
+#include <QCheckBox>
 #include "serial.h"
 
 
@@ -25,6 +26,8 @@ private slots:
 private:
     Ui::tab_gpio *ui;
     Serial &m_serialConn;
+    void _managePinModeText(QCheckBox&, bool); //  Manage PinMode CheckBox text
+    void _manageOutputText(QCheckBox&, bool); //  Manage Output CheckBox text
 };
 
 #endif // TAB_GPIO_H
