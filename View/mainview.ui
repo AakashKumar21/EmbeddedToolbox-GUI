@@ -16,6 +16,9 @@
   <property name="windowTitle">
    <string>Arduino Controller</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="mainTab">
     <property name="geometry">
@@ -42,7 +45,7 @@
         <x>10</x>
         <y>10</y>
         <width>851</width>
-        <height>611</height>
+        <height>621</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="loTabGpio"/>

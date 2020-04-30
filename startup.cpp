@@ -18,5 +18,5 @@ void Startup::show() const
 Startup::~Startup()
 {
     Utils::DestructorMsg(*this);
-    delete &m_mainView;
+    m_mainView->~MainView();
 }
