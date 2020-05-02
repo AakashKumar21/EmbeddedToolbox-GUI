@@ -1,18 +1,17 @@
 #include "View/mainview.h"
 #include <utils.h>
-// BUG : IDK WHY DESTRUCTOR IS NOT CALLING AS THE FUNC "DestructorMsg" IS NOT EXECUTING
 
-MainView::MainView(QWidget *parent, TabSetup &setup, TabGpio &gpio)
+MainView::MainView(QWidget *parent, TabSetup &setup, TabGpioUno &gpio_uno)
     : QMainWindow(parent),
       ui(new Ui::MainView),
       m_tabSetup(setup),
-      m_tabGpio(gpio)
+      m_tabGpioUno(gpio_uno)
 {
     ui->setupUi(this);
     m_tabSetup.setParent(this);
-    m_tabGpio.setParent(this);
-    ui->loTabGpio->addWidget(&m_tabGpio);
+    m_tabGpioUno.setParent(this);
     ui->loSetupTab->addWidget(&m_tabSetup);
+    ui->loTabGpio->addWidget(&m_tabGpioUno);
 }
 
 

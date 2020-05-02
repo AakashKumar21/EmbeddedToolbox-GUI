@@ -64,12 +64,12 @@
    <property name="title">
     <string>Connection</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>11</x>
+      <x>10</x>
       <y>27</y>
-      <width>771</width>
+      <width>791</width>
       <height>51</height>
      </rect>
     </property>
@@ -89,7 +89,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="baudRateSelect">
+      <widget class="QComboBox" name="dropdown_baudRateSelect">
        <item>
         <property name="text">
          <string>115200</string>
@@ -98,16 +98,50 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comPortSelect">
+      <widget class="QComboBox" name="dropdown_selectBoard">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="statusTip">
+        <string/>
+       </property>
+       <property name="whatsThis">
+        <string/>
+       </property>
+       <property name="accessibleName">
+        <string/>
+       </property>
+       <property name="currentText">
+        <string>Select Board</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Select Board</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Arduino Uno</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="dropdown_comPortSelect">
        <property name="editable">
         <bool>false</bool>
        </property>
        <property name="currentText">
-        <string/>
+        <string>Select Port</string>
        </property>
        <property name="duplicatesEnabled">
         <bool>false</bool>
        </property>
+       <item>
+        <property name="text">
+         <string>Select Port</string>
+        </property>
+       </item>
       </widget>
      </item>
      <item>

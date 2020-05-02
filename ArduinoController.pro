@@ -16,9 +16,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    View/TabGpio/tabgpiouno.cpp \
     main.cpp \
     View\mainview.cpp \
-    View\tab_gpio.cpp \
     View\tab_setup.cpp \
     serial.cpp \
     settings.cpp \
@@ -26,8 +26,8 @@ SOURCES += \
     utils.cpp
 
 HEADERS += \
+    View/TabGpio/tabgpiouno.h \
     View\mainview.h \
-    View\tab_gpio.h \
     View\tab_setup.h \
     serial.h \
     serialcommands.h \
@@ -36,8 +36,8 @@ HEADERS += \
     utils.h
 
 FORMS += \
+    View/TabGpio/tabgpiouno.ui \
     View\mainview.ui \
-    View\tab_gpio.ui \
     View\tab_setup.ui
 
 # Default rules for deployment.

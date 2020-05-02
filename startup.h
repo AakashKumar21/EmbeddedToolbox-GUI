@@ -3,8 +3,8 @@
 
 #include <QObject>
 #include "View/mainview.h"
-#include "View/tab_gpio.h"
 #include "View/tab_setup.h"
+#include "View/TabGpio/tabgpiouno.h"
 #include "utils.h"
 
 class Startup final: public QObject
@@ -17,8 +17,9 @@ public:
 
 private:
     TabSetup *m_tabSetup;
-    TabGpio *m_tabGpio;
+    TabGpioUno *m_tabGpioUno;
     MainView *m_mainView;
+
     QJsonObject GetJsonObject(const QString& rawJson);
 
     explicit Startup(const Startup& rhs) = delete;

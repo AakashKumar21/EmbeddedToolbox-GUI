@@ -4,8 +4,8 @@
 Startup::Startup():
     QObject(nullptr),
     m_tabSetup(new TabSetup(nullptr)),
-    m_tabGpio(new TabGpio(nullptr)),
-    m_mainView(new MainView(nullptr, *m_tabSetup, *m_tabGpio))
+    m_tabGpioUno(new TabGpioUno(nullptr)),
+    m_mainView(new MainView(nullptr, *m_tabSetup,*m_tabGpioUno))
 {
 }
 

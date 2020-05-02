@@ -25,9 +25,9 @@ TabSetup::~TabSetup()
 
 void TabSetup::on_btn_refresh_port_clicked()
 {
-    ui->comPortSelect->clear();
-    ui->comPortSelect->addItems(Serial::getComPortList());
-    ui->comPortSelect->showPopup();
+    ui->dropdown_comPortSelect->clear();
+    ui->dropdown_comPortSelect->addItems(Serial::getComPortList());
+    ui->dropdown_comPortSelect->showPopup();
     qDebug() << "Refresh btn clicked\n";
 }
 
