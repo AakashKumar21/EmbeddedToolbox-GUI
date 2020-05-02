@@ -13,14 +13,32 @@ Serial* Serial::getInstance() {
    return(_instance);
 }
 
-void Serial::Write(char cmd)
+int Serial::Write(char cmd)  // 0: success , 1:fail
 {
-
+    qDebug() << "Going to write " << static_cast<int>(cmd) <<'\n';
+    if(m_qSerialPort->isWritable())
+    {
+        qDebug() << "Port Open, Writing\n";
+        QByteArray arr;
+        arr.append(cmd);
+        m_qSerialPort->write(arr);
+        if(m_qSerialPort->error() == 0)
+        {
+            qDebug() << "Success\n";
+            return 0;
+        }
+        else
+        {
+            qDebug() << m_qSerialPort->error();
+            return 1;
+        }
+    }
+    return 1;
 }
 
-void Serial::Write(char cmd, char ins)
+int Serial::Write(char cmd, char ins)  // 0: success , 1:fail
 {
-    qDebug() << "Going to write " << static_cast<int>(cmd) <<' ' << static_cast<int>(ins) << '\n';
+    qDebug() << "Going to write " << QString::number(cmd)  <<' ' << QString::number(ins) << '\n';
     if(m_qSerialPort->isWritable())
     {
         qDebug() << "Port Open, Writing\n";
@@ -30,12 +48,15 @@ void Serial::Write(char cmd, char ins)
         if(m_qSerialPort->error() == 0)
         {
             qDebug() << "Success\n";
+            return 0;
         }
         else
         {
             qDebug() << m_qSerialPort->error();
+            return 1;
         }
     }
+    return 1;
 }
 
 

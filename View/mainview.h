@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include "ui_mainview.h"
-#include "ui_tab_gpio.h"
 #include "View/tab_setup.h"
 #include "View/TabGpio/tabgpiouno.h"
 

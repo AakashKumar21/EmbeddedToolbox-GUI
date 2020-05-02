@@ -14,9 +14,9 @@ public:
     static Serial* getInstance();
 
     QSerialPort::SerialPortError sendReset();
-    void Write(char cmd);
-    void Write(char cmd, char ins);
-    void Write(char cmd, char ins, char);
+    int Write(char cmd);
+    int Write(char cmd, char ins);
+    int Write(char cmd, char ins, char);
     QSerialPort::SerialPortError getInfo() const; //  Will return SerialInfo including connected/disconnected
     void setPort(int port_index); // index of QList<QSerialPortInfo>
     QSerialPort::SerialPortError Begin(enum QSerialPort::BaudRate);
