@@ -18,7 +18,7 @@ public:
 
 private slots:
 
-    void on_comPortSelect_activated(int index);
+    void on_dropdown_comPortSelect_activated(int index);
 
     void on_btn_refresh_port_clicked();
 

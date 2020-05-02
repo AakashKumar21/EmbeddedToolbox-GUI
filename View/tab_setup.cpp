@@ -31,7 +31,7 @@ void TabSetup::on_btn_refresh_port_clicked()
     qDebug() << "Refresh btn clicked\n";
 }
 
-void TabSetup::on_comPortSelect_activated(int index)
+void TabSetup::on_dropdown_comPortSelect_activated(int index)
 {
     qDebug() << "Index: " << index << "selected from drop down ";
     m_serialConn.setPort(index);
