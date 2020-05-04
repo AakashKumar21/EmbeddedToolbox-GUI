@@ -11,10 +11,10 @@ public:
     explicit Settings(QObject *parent, QString filename);
 
 private:
-    void ReadJsonFile();
+//    void ReadJsonFile();
     QString m_filename;
-    QString ReadFromInternalRes();
-    QJsonObject GetJsonObject(const QString &rawJson);
+//    QString ReadFromInternalRes();
+//    QJsonObject GetJsonObject(const QString &rawJson);
 
 private:
 

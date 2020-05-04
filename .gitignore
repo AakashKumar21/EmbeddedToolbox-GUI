@@ -71,3 +71,4 @@ Thumbs.db
 *.dll
 *.exe
 
+.vs/ArduinoController/v16/Browse.VC.db

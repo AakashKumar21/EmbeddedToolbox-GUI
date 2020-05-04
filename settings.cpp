@@ -16,22 +16,22 @@ Settings::Settings(QObject *parent, QString filename) :
 
 }
 
-void Settings::ReadJsonFile()
-{
-//    QString raw_json
-    auto default_setting = ReadFromInternalRes();
-}
+//void Settings::ReadJsonFile()
+//{
+////    QString raw_json
+//    auto default_setting = ReadFromInternalRes();
+//}
 
-QString Settings::ReadFromInternalRes()
-{
+//QString Settings::ReadFromInternalRes()
+//{
 
-}
+//}
 
-QJsonObject Settings::GetJsonObject(const QString& rawJson)
-{
-    QJsonParseError json_parse_err;
-    QJsonDocument json_doc =  QJsonDocument::fromJson(rawJson.toUtf8(),&json_parse_err);
-    QJsonObject json_obj = json_doc.object();
-//    return std::make_pair(json_obj, json_parse_err);
+//QJsonObject Settings::GetJsonObject(const QString& rawJson)
+//{
+//    QJsonParseError json_parse_err;
+//    QJsonDocument json_doc =  QJsonDocument::fromJson(rawJson.toUtf8(),&json_parse_err);
+//    QJsonObject json_obj = json_doc.object();
+////    return std::make_pair(json_obj, json_parse_err);
 
-}
+//}
