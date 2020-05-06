@@ -105,7 +105,7 @@ void TabGpioUno::on_OutputClicked()
             m_serialConn->Write(Inst::OP::PinLow,
                                 pin_no);
             m_listCheckBox_Output[pin_no]->setText(
-                        m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Pull-Up");
+                        m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Floating");
         }
     }
 }

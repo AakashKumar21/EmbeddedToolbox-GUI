@@ -17,6 +17,7 @@ TabSetup::TabSetup(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->btn_disconnect->setDisabled(true);
+    ui->btn_connect->setDisabled(true);
 
     // StyleSheet files dir
     QDir m_dir_theme_dir(":/style/resource");
@@ -50,6 +51,7 @@ void TabSetup::on_btn_refresh_port_clicked()
 void TabSetup::on_dropdown_comPortSelect_activated(int index)
 {
     qDebug() << "Index: " << index << "selected from drop down ";
+    ui->btn_connect->setEnabled(true);
     m_serialConn.setPort(index);
 }
 
