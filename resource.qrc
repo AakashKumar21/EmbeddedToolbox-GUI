@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/style">
+        <file>resource/Diffnes.qss</file>
+        <file>resource/Combinear.qss</file>
+        <file>resource/Darkeum.qss</file>
+        <file>resource/Integrid.qss</file>
+    </qresource>
+</RCC>

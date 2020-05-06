@@ -154,6 +154,16 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QComboBox" name="dropdown_themes">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>280</y>
+     <width>221</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

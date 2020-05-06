@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "serial.h"
+#include <QDir>
 
 namespace Ui {
 class tab_setup;
@@ -26,8 +27,11 @@ private slots:
 
     void on_btn_disconnect_clicked();
 
+    void on_dropdown_themes_activated(int index);
+
 private:
     Ui::tab_setup *ui;
+    QStringList m_styleSheets;
     Serial &m_serialConn;
 };
 

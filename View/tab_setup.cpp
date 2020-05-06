@@ -6,7 +6,9 @@
 #include <QSerialPortInfo>
 #include <QDebug>
 #include <QSerialPort>
-
+#include <QFile>
+#include <QDir>
+#include <QPushButton>
 
 TabSetup::TabSetup(QWidget *parent) :
     QWidget(parent),
@@ -15,6 +17,20 @@ TabSetup::TabSetup(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->btn_disconnect->setDisabled(true);
+
+    // StyleSheet files dir
+    QDir m_dir_theme_dir(":/style/resource");
+    auto file_styleSheets_names = m_dir_theme_dir.entryList();
+    m_styleSheets.append(""); // Default style
+    ui->dropdown_themes->addItem("Default"); // Empty StyleSheet i.e default
+    for(auto &styleSheet :file_styleSheets_names)
+    {
+        ui->dropdown_themes->addItem(styleSheet);
+        QFile file(":/style/resource/" + styleSheet);
+        file.open(QFile::ReadOnly);
+        m_styleSheets.append(QLatin1String(file.readAll()));
+        file.close();
+    }
 }
 
 TabSetup::~TabSetup()
@@ -56,4 +72,9 @@ void TabSetup::on_btn_disconnect_clicked()
     m_serialConn.End();
     ui->btn_connect->setEnabled(true);
     ui->btn_disconnect->setDisabled(true);
+}
+
+void TabSetup::on_dropdown_themes_activated(int index)
+{
+    qApp->setStyleSheet(m_styleSheets[index]);
 }
