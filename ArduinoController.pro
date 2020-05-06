@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     View/TabGpio/tabgpiouno.cpp \
+    View/TabAdc/tabadcuno.cpp \
     main.cpp \
     View\mainview.cpp \
     View\tab_setup.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
     utils.cpp
 
 HEADERS += \
+    View/TabAdc/tabadcuno.h \
     View/TabGpio/tabgpiouno.h \
     View\mainview.h \
     View\tab_setup.h \
@@ -37,6 +39,7 @@ HEADERS += \
     utils.h
 
 FORMS += \
+    View/TabAdc/tabadcuno.ui \
     View/TabGpio/tabgpiouno.ui \
     View\mainview.ui \
     View\tab_setup.ui

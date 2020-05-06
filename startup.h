@@ -5,6 +5,7 @@
 #include "View/mainview.h"
 #include "View/tab_setup.h"
 #include "View/TabGpio/tabgpiouno.h"
+#include "View/TabAdc/tabadcuno.h"
 #include "utils.h"
 
 class Startup final: public QObject
@@ -18,6 +19,7 @@ public:
 private:
     TabSetup *m_tabSetup;
     TabGpioUno *m_tabGpioUno;
+    TabAdcUno *m_tabAdcUno;
     MainView *m_mainView;
 
     QJsonObject GetJsonObject(const QString& rawJson);
