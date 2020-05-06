@@ -16,14 +16,14 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>70</y>
+     <x>10</x>
+     <y>10</y>
      <width>211</width>
-     <height>381</height>
+     <height>551</height>
     </rect>
    </property>
    <property name="title">
-    <string>GroupBox</string>
+    <string>GPIO Pins</string>
    </property>
    <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
@@ -31,7 +31,7 @@
       <x>10</x>
       <y>30</y>
       <width>191</width>
-      <height>341</height>
+      <height>511</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3"/>

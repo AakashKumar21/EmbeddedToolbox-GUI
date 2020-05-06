@@ -19,12 +19,13 @@ TabGpioUno::~TabGpioUno()
 
 void TabGpioUno::m_init_gui()
 {
+
     QString tmp = "D";
     for(int i{}; i<m_no_of_pins_per_group; i++)
     {
         m_listLabel.append(new QLabel(tmp + QString::number(i),this));
         m_listCheckBox_PinMode.append(new QCheckBox("Input",this));
-        m_listCheckBox_Output.append(new QCheckBox(this));
+        m_listCheckBox_Output.append(new QCheckBox("Floating",this));
 
         // Setting objects name as pm# for pinmode
         // Setting objects name as op# for output
@@ -47,10 +48,11 @@ void TabGpioUno::on_PinmodeClicked()
     QObject *senderObj = sender(); // to get Sender object
     QString senderObjName = senderObj->objectName();
     char pin_no = senderObjName.toInt();
-
     auto checkBox = dynamic_cast<QCheckBox*>(senderObj);
+
     if(checkBox)
     {
+        // PinMode OUTPUT
         qDebug() << "PinMode: " << QString::number(pin_no) << " Set to";
         if(checkBox->isChecked())
         {
@@ -61,7 +63,8 @@ void TabGpioUno::on_PinmodeClicked()
             }
             else{                                           //IF SUCCESS
                 m_listCheckBox_PinMode[pin_no]->setText("Output");
-                m_listCheckBox_Output[pin_no]->setText("Low");
+                m_listCheckBox_Output[pin_no]->setText(
+                            m_listCheckBox_Output[pin_no]->isChecked()?"High":"Low");
             }
         }
         else {
@@ -70,9 +73,10 @@ void TabGpioUno::on_PinmodeClicked()
             {
                 qDebug() << "Error Writing";
             }
-            else{
-                m_listCheckBox_PinMode[pin_no]->setText("Input"); //IF SUCCESS
-                m_listCheckBox_Output[pin_no]->setText("Floating");
+            else{   //IF SUCCESS
+                m_listCheckBox_PinMode[pin_no]->setText("Input");
+                m_listCheckBox_Output[pin_no]->setText(
+                            m_listCheckBox_Output[pin_no]->isChecked()?"Pull-Up":"Floating");
             }
         }
     }
@@ -93,11 +97,15 @@ void TabGpioUno::on_OutputClicked()
             qDebug() << "High";
             m_serialConn->Write(Inst::OP::PinHigh,
                                 pin_no);
+            m_listCheckBox_Output[pin_no]->setText(
+                        m_listCheckBox_PinMode[pin_no]->isChecked()?"High":"Pull-Up");
         }
         else {
             qDebug() << "Low";
             m_serialConn->Write(Inst::OP::PinLow,
                                 pin_no);
+            m_listCheckBox_Output[pin_no]->setText(
+                        m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Pull-Up");
         }
     }
 }

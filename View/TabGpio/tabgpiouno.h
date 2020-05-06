@@ -22,7 +22,7 @@ public:
 
 private:
     Ui::TabGpioUno *ui;
-    int m_no_of_pins_per_group = 8;
+    int m_no_of_pins_per_group = 14;
     Serial* m_serialConn;
 
     void m_init_gui();
