@@ -22,6 +22,9 @@
      <height>171</height>
     </rect>
    </property>
+   <property name="toolTipDuration">
+    <number>1</number>
+   </property>
    <property name="title">
     <string>ADC Control</string>
    </property>
@@ -30,11 +33,113 @@
      <rect>
       <x>10</x>
       <y>30</y>
-      <width>791</width>
+      <width>181</width>
       <height>131</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="loAdcControl"/>
+    <layout class="QGridLayout" name="lo_AdcSelect"/>
+   </widget>
+   <widget class="QComboBox" name="dropdown_vref">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>30</y>
+      <width>511</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Voltage Ref</string>
+    </property>
+    <property name="statusTip">
+     <string>Voltage Ref</string>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="currentText">
+     <string> AREF, Internal Vref turned off</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <item>
+     <property name="text">
+      <string> AREF, Internal Vref turned off</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>AVcc with external capacitor at AREF pin</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Internal 1.1V Voltage reference with external capacitor at AREF pin</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>30</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Voltage Ref.</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="dropdown_prescale">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>60</y>
+      <width>511</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Voltage Ref</string>
+    </property>
+    <property name="statusTip">
+     <string>Voltage Ref</string>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="currentText">
+     <string/>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>60</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clk Prescale.</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>90</y>
+      <width>591</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="lo_AdcReadout"/>
    </widget>
   </widget>
  </widget>
