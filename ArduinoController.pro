@@ -1,5 +1,5 @@
 QT       += core gui serialport
-QT_QPA_PLATFORM_PLUGIN_PATH+=C:\Qt\5.12.8\msvc2017\plugins\platforms
+#QT_QPA_PLATFORM_PLUGIN_PATH+=C:\Qt\5.12.8\msvc2017\plugins\platforms
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -45,3 +45,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resource.qrc
