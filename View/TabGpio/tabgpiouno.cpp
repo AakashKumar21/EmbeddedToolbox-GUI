@@ -57,7 +57,7 @@ void TabGpioUno::on_PinmodeClicked()
         if(checkBox->isChecked())
         {
             qDebug() << "Output";
-            if( m_serialConn->Write(Inst::OP::PinMode_Out,pin_no) )
+            if( m_serialConn->Write(Inst::PinMode::PinMode_Out,pin_no) )
             {
                 qDebug() << "Error Writing";
             }
@@ -69,7 +69,7 @@ void TabGpioUno::on_PinmodeClicked()
         }
         else {
             qDebug() << "Input";
-            if (m_serialConn->Write(Inst::OP::PinMode_In, pin_no))
+            if (m_serialConn->Write(Inst::PinMode::PinMode_In, pin_no))
             {
                 qDebug() << "Error Writing";
             }
@@ -95,14 +95,14 @@ void TabGpioUno::on_OutputClicked()
         if(checkBox->isChecked())
         {
             qDebug() << "High";
-            m_serialConn->Write(Inst::OP::PinHigh,
+            m_serialConn->Write(Inst::PinMode::PinHigh,
                                 pin_no);
             m_listCheckBox_Output[pin_no]->setText(
                         m_listCheckBox_PinMode[pin_no]->isChecked()?"High":"Pull-Up");
         }
         else {
             qDebug() << "Low";
-            m_serialConn->Write(Inst::OP::PinLow,
+            m_serialConn->Write(Inst::PinMode::PinLow,
                                 pin_no);
             m_listCheckBox_Output[pin_no]->setText(
                         m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Floating");
