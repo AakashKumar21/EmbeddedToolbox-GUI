@@ -13,14 +13,14 @@ Serial* Serial::getInstance() {
    return(_instance);
 }
 
-int Serial::Write(char cmd)  // 0: success , 1:fail
+int Serial::Write(char cmd, char ins)  // 0: success , 1:fail
 {
-    qDebug() << "Going to write " << static_cast<int>(cmd) <<'\n';
+    qDebug() << "Going to write " << QString::number(cmd)  <<' ' << QString::number(ins) << '\n';
     if(m_qSerialPort->isWritable())
     {
         qDebug() << "Port Open, Writing\n";
         QByteArray arr;
-        arr.append(cmd);
+        arr.append(cmd); arr.append(ins);
         m_qSerialPort->write(arr);
         if(m_qSerialPort->error() == 0)
         {
@@ -36,15 +36,51 @@ int Serial::Write(char cmd)  // 0: success , 1:fail
     return 1;
 }
 
-int Serial::Write(char cmd, char ins)  // 0: success , 1:fail
+int Serial::Write(char cmd, char a, char b)
 {
-    qDebug() << "Going to write " << QString::number(cmd)  <<' ' << QString::number(ins) << '\n';
+    qDebug() << "Going to write "
+             << QString::number(cmd)
+             <<' '
+             << QString::number(a)
+             << ' '
+             << QString::number(b);
+
     if(m_qSerialPort->isWritable())
     {
         qDebug() << "Port Open, Writing\n";
         QByteArray arr;
-        arr.append(cmd); arr.append(ins);
+        arr.append(cmd);
+        arr.append(a);
+        arr.append(b);
         m_qSerialPort->write(arr);
+
+        if(m_qSerialPort->error() == 0)
+        {
+            qDebug() << "Success\n";
+            return 0;
+        }
+        else
+        {
+            qDebug() << m_qSerialPort->error();
+            return 1;
+        }
+    }
+    return 1;
+}
+
+bool Serial::Write(QByteArray data)
+{
+    for(auto &t: data)
+    {
+        qDebug() << t << ' ';
+    }
+
+    if(m_qSerialPort->isWritable())
+    {
+        qDebug() << "Port Open, Writing\n";
+
+        m_qSerialPort->write(data);
+
         if(m_qSerialPort->error() == 0)
         {
             qDebug() << "Success\n";
@@ -109,6 +145,65 @@ QStringList Serial::getComPortList()
         portList.append(x.portName());
     }
     return portList;
+}
+
+bool Serial::set_pinMode(Cmd cmd, PinMode pinMode, Pin pin)
+{
+    QByteArray data;
+    data.append(static_cast<char>(cmd));
+    data.append(static_cast<char>(pinMode));
+    data.append(static_cast<char>(pin));
+
+    return this->Write(data);
+}
+
+bool Serial::set_digitalWrite(Cmd cmd, Pin pin, Output output)
+{
+    QByteArray data;
+    data.append(static_cast<char>(cmd));
+    data.append(static_cast<char>(pin));
+    data.append(static_cast<char>(output));
+
+    return this->Write(data);
+}
+
+bool Serial::set_analogWrite(Cmd cmd, Pin pin, int duty)
+{
+    QByteArray data;
+    data.append(static_cast<char>(cmd));
+    data.append(static_cast<char>(pin));
+    data.append(static_cast<char>(duty));
+
+    return this->Write(data);
+}
+
+bool Serial::set_digitalRead(Cmd cmd, Pin pin)
+{
+    QByteArray data;
+    data.append(static_cast<char>(cmd));
+    data.append(static_cast<char>(pin));
+
+    return this->Write(data);
+}
+
+bool Serial::set_AnalogRead(Cmd cmd, MUX pin)
+{
+    QByteArray data;
+    data.append(static_cast<char>(cmd));
+    data.append(static_cast<char>(pin));
+
+    return this->Write(data);
+}
+
+bool Serial::set_AnalogConfig(Cmd cmd, AdcPrescale divider, AdcVRef ref, AdcBits accuracy)
+{
+    QByteArray data;
+    data.append(static_cast<char>(cmd));
+    data.append(static_cast<char>(divider));
+    data.append(static_cast<char>(ref));
+    data.append(static_cast<char>(accuracy));
+
+    return this->Write(data);
 }
 
 void Serial::m_findComPort()
