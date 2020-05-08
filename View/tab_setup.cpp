@@ -32,6 +32,7 @@ TabSetup::TabSetup(QWidget *parent) :
         m_styleSheets.append(QLatin1String(file.readAll()));
         file.close();
     }
+
 }
 
 TabSetup::~TabSetup()
@@ -53,6 +54,15 @@ void TabSetup::on_dropdown_comPortSelect_activated(int index)
     qDebug() << "Index: " << index << "selected from drop down ";
     ui->btn_connect->setEnabled(true);
     m_serialConn.setPort(index);
+    qDebug() << "Connnecting";
+    auto err = m_serialConn.Begin(QSerialPort::Baud115200); // Connection begins
+    if(err == 0)
+    {
+        qDebug() << "Connection Success\n";
+        ui->btn_connect->setDisabled(true);
+        ui->btn_disconnect->setEnabled(true);
+    }
+    else qDebug() << "Error: " << err << "While Opening Port";
 }
 
 void TabSetup::on_btn_connect_clicked()
