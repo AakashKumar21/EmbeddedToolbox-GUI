@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QPushButton>
+#include <QRadioButton>
 #include "serial.h"
 
 namespace Ui {
@@ -29,6 +30,7 @@ private:
     QList <QCheckBox*> m_listCheckBox_PinMode;
     QList <QCheckBox*> m_listCheckBox_Output;
     QList <QLabel*> m_listLabel;
+    QList <QLabel*> m_listReadout;
     void on_PinmodeClicked();
     void on_OutputClicked();
 };

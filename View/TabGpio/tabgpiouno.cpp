@@ -25,16 +25,20 @@ void TabGpioUno::m_init_gui()
     {
         m_listLabel.append(new QLabel(tmp + QString::number(i),this));
         m_listCheckBox_PinMode.append(new QCheckBox("Input",this));
-        m_listCheckBox_Output.append(new QCheckBox("Floating",this));
+        m_listCheckBox_Output.append(new QCheckBox("Float",this));
+        m_listReadout.append(new QLabel("Low",this));
+        m_listReadout[i]->setDisabled(true);
+        m_listReadout[i]->setStyleSheet(("QLabel { background-color : #42A5F5 ; color : white; }"));
+        m_listReadout[i]->setAlignment(Qt::AlignCenter);
 
-        // Setting objects name as pm# for pinmode
-        // Setting objects name as op# for output
         m_listCheckBox_PinMode[i]->setObjectName(QString::number(i));
         m_listCheckBox_Output[i]->setObjectName(QString::number(i));
+        m_listReadout[i]->setObjectName(QString::number(i));
 
-        ui->gridLayout_3->addWidget(m_listLabel[i],i,0);
-        ui->gridLayout_3->addWidget(m_listCheckBox_PinMode[i],i,1);
-        ui->gridLayout_3->addWidget(m_listCheckBox_Output[i],i,2);
+        ui->gridLayout_3->addWidget(m_listLabel[i],0,i);
+        ui->gridLayout_3->addWidget(m_listCheckBox_PinMode[i],1,i);
+        ui->gridLayout_3->addWidget(m_listCheckBox_Output[i],2,i);
+        ui->gridLayout_3->addWidget(m_listReadout[i],3,i);
 
         connect(m_listCheckBox_PinMode[i], &QCheckBox::stateChanged,
                 this, &TabGpioUno::on_PinmodeClicked);
@@ -53,7 +57,7 @@ void TabGpioUno::on_PinmodeClicked()
     if(checkBox)
     {
         // PinMode OUTPUT
-        qDebug() << "PinMode: " << QString::number(pin_no) << " Set to";
+        qDebug() << "PinMode: " << QString::number(pin_no) << "Set to";
         if(checkBox->isChecked())
         {
             qDebug() << "Output";
@@ -76,7 +80,8 @@ void TabGpioUno::on_PinmodeClicked()
             else{   //IF SUCCESS
                 m_listCheckBox_PinMode[pin_no]->setText("Input");
                 m_listCheckBox_Output[pin_no]->setText(
-                            m_listCheckBox_Output[pin_no]->isChecked()?"Pull-Up":"Floating");
+                            m_listCheckBox_Output[pin_no]->isChecked()?"PullUp":"Float");
+                m_listReadout[pin_no]->setEnabled(true);
             }
         }
     }
@@ -98,14 +103,14 @@ void TabGpioUno::on_OutputClicked()
             m_serialConn->Write(Inst::PinMode::PinHigh,
                                 pin_no);
             m_listCheckBox_Output[pin_no]->setText(
-                        m_listCheckBox_PinMode[pin_no]->isChecked()?"High":"Pull-Up");
+                        m_listCheckBox_PinMode[pin_no]->isChecked()?"High":"PullUp");
         }
         else {
             qDebug() << "Low";
             m_serialConn->Write(Inst::PinMode::PinLow,
                                 pin_no);
             m_listCheckBox_Output[pin_no]->setText(
-                        m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Floating");
+                        m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Float");
         }
     }
 }
