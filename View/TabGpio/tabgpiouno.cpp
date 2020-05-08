@@ -28,7 +28,6 @@ void TabGpioUno::m_init_gui()
         m_listCheckBox_Output.append(new QCheckBox("Float",this));
         m_listReadout.append(new QLabel("Low",this));
         m_listReadout[i]->setDisabled(true);
-        m_listReadout[i]->setStyleSheet(("QLabel { background-color : #42A5F5 ; color : white; }"));
         m_listReadout[i]->setAlignment(Qt::AlignCenter);
 
         m_listCheckBox_PinMode[i]->setObjectName(QString::number(i));
@@ -61,7 +60,8 @@ void TabGpioUno::on_PinmodeClicked()
         if(checkBox->isChecked())
         {
             qDebug() << "Output";
-            if( m_serialConn->Write(Inst::PinMode::PinMode_Out,pin_no) )
+            if( m_serialConn->set_pinMode(PinMode::PinMode_Out,
+                                          static_cast<Pin>(pin_no)) )
             {
                 qDebug() << "Error Writing";
             }
@@ -70,11 +70,13 @@ void TabGpioUno::on_PinmodeClicked()
                 m_listCheckBox_Output[pin_no]->setText(
                             m_listCheckBox_Output[pin_no]->isChecked()?"High":"Low");
                 m_listReadout[pin_no]->setDisabled(true);
+                m_listReadout[pin_no]->setStyleSheet("");
             }
         }
         else {
             qDebug() << "Input";
-            if (m_serialConn->Write(Inst::PinMode::PinMode_In, pin_no))
+            if (m_serialConn->set_pinMode(PinMode::PinMode_In,
+                                          static_cast<Pin>(pin_no)) )
             {
                 qDebug() << "Error Writing";
             }
@@ -101,15 +103,15 @@ void TabGpioUno::on_OutputClicked()
         if(checkBox->isChecked())
         {
             qDebug() << "High";
-            m_serialConn->Write(Inst::PinMode::PinHigh,
-                                pin_no);
+            m_serialConn->set_digitalWrite(static_cast<Pin>(pin_no),
+                                           Output::High);
             m_listCheckBox_Output[pin_no]->setText(
                         m_listCheckBox_PinMode[pin_no]->isChecked()?"High":"PullUp");
         }
         else {
             qDebug() << "Low";
-            m_serialConn->Write(Inst::PinMode::PinLow,
-                                pin_no);
+            m_serialConn->set_digitalWrite(static_cast<Pin>(pin_no),
+                                           Output::Low);
             m_listCheckBox_Output[pin_no]->setText(
                         m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Float");
         }

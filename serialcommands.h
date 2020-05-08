@@ -1,43 +1,12 @@
 #ifndef SERIALCOMMANDS_H
 #define SERIALCOMMANDS_H
 
-namespace Inst {  // Inst for instruction
-    enum PinMode{
-        PinMode_In = static_cast<char>(0),
-        PinMode_Out,
-        PullUp_True,
-        PullUp_False,
-        PullDown_True,
-        PullDown_False,
-        PinLow,
-        PinHigh,
-        DigitalRead,
-        AnalogRead
-    };
-    enum Pin{
-        D8 = static_cast<char>(0),
-        D9,
-        D10,
-        D11,
-        D12,
-        D13,
-        D0,
-        D1,
-        D2,
-        D3,
-        D4,
-        D5,
-        D6,
-        D7,
-        A0,
-        A1,
-        A2,
-        A3,
-        A4,
-        A5,
-        A6
-    };
-}
+#define HIGH 0x1
+#define LOW  0x0
+
+#define INPUT 0x0
+#define OUTPUT 0x1
+#define INPUT_PULLUP 0x2
 
 enum class Cmd{
     PinMode,
@@ -49,12 +18,17 @@ enum class Cmd{
 };
 
 enum class PinMode {
-    PinMode_In,
-    PinMode_Out,
-    PullUp_True,
-    PullUp_False,
-    PullDown_True,
-    PullDown_False,
+    PinMode_In = INPUT,
+    PinMode_Out = OUTPUT,
+    PullUp_True = INPUT_PULLUP,
+//    PullUp_False,
+//    PullDown_True,
+//    PullDown_False,
+};
+
+enum class Output{
+    High = HIGH,
+    Low = LOW
 };
 
 enum class Pin{
@@ -103,11 +77,6 @@ enum class AdcVRef{
     Aref,
     AVcc,
     Internal1_1V
-};
-
-enum class Output{
-    High,
-    Low
 };
 
 class Pwm{
