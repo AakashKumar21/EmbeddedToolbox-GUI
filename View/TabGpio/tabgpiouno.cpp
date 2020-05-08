@@ -69,6 +69,7 @@ void TabGpioUno::on_PinmodeClicked()
                 m_listCheckBox_PinMode[pin_no]->setText("Output");
                 m_listCheckBox_Output[pin_no]->setText(
                             m_listCheckBox_Output[pin_no]->isChecked()?"High":"Low");
+                m_listReadout[pin_no]->setDisabled(true);
             }
         }
         else {
