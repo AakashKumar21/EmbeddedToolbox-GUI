@@ -37,6 +37,29 @@
     <layout class="QGridLayout" name="gridLayout_3"/>
    </widget>
   </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>280</y>
+     <width>501</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSync">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>180</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sync</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

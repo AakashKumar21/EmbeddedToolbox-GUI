@@ -33,6 +33,10 @@ private:
     QList <QLabel*> m_listReadout;
     void on_PinmodeClicked();
     void on_OutputClicked();
+
+private slots:
+    void handleData();
+    void on_btnSync_clicked();
 };
 
 #endif // TABGPIOUNO_H

@@ -27,7 +27,6 @@ void TabGpioUno::m_init_gui()
         m_listCheckBox_PinMode.append(new QCheckBox("Input",this));
         m_listCheckBox_Output.append(new QCheckBox("Float",this));
         m_listReadout.append(new QLabel("Low",this));
-        m_listReadout[i]->setDisabled(true);
         m_listReadout[i]->setAlignment(Qt::AlignCenter);
 
         m_listCheckBox_PinMode[i]->setObjectName(QString::number(i));
@@ -44,6 +43,8 @@ void TabGpioUno::m_init_gui()
         connect(m_listCheckBox_Output[i], &QCheckBox::stateChanged,
                 this, &TabGpioUno::on_OutputClicked);
     }
+
+    connect(m_serialConn, &Serial::NotifyData , this , &TabGpioUno::handleData );
 }
 
 void TabGpioUno::on_PinmodeClicked()
@@ -116,4 +117,46 @@ void TabGpioUno::on_OutputClicked()
                         m_listCheckBox_PinMode[pin_no]->isChecked()?"Low":"Float");
         }
     }
+}
+
+void TabGpioUno::handleData()
+{
+    auto data = m_serialConn->getData();
+//    PinMode cmd = static_cast<PinMode>(static_cast<int>(data[0]));
+//    int index = static_cast<int>(data[1]);
+//    Output output = static_cast<Output>(static_cast<int>(data[2]));
+
+    qDebug() << data;
+
+    for(int i = 1; i<=14; i++)
+    {
+//        qDebug("%d:%c  ",i,data[i]);
+        if(data[i] == static_cast<char>( Output::Low ))
+        {
+            if(m_listReadout[i-1]->isEnabled())
+
+            {
+                m_listReadout[i-1]->setText("Low");
+                m_listReadout[i-1]->setStyleSheet
+                        ("QLabel { color : blue; }");
+            }
+        }
+        else
+        {
+            if(m_listReadout[i-1]->isEnabled())
+            {
+                m_listReadout[i-1]->setText("High");
+                m_listReadout[i-1]->setStyleSheet
+                        ("QLabel { color : Red; }");
+            }
+        }
+    }
+//    qDebug() << '\n';
+
+}
+
+void TabGpioUno::on_btnSync_clicked()
+{
+    qDebug() << "Sending Sync";
+    m_serialConn->send_Sync();
 }

@@ -74,6 +74,8 @@ void TabSetup::on_btn_connect_clicked()
         qDebug() << "Connection Success\n";
         ui->btn_connect->setDisabled(true);
         ui->btn_disconnect->setEnabled(true);
+
+        m_serialConn.send_Sync();
     }
     else qDebug() << "Error: " << err << "While Opening Port";
 }

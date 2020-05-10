@@ -4,7 +4,9 @@
 #include <QObject>
 #include <QSerialPortInfo>
 #include <QSerialPort>
+#include <QTimer>
 #include "serialcommands.h"
+#include <QVector>
 
 // This in singleton class
 class Serial : public QObject
@@ -26,6 +28,8 @@ public:
     bool set_digitalRead(Pin pin) ;
     bool set_AnalogRead(MUX pin) ;
     bool set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy) ;
+    bool send_Sync();
+    QByteArray getData();
 
 signals:
 //    void NotifyConnected();
@@ -46,6 +50,17 @@ private:
     QSerialPort *m_qSerialPort;
     static QList<QSerialPortInfo> m_serialPortList;
     static void m_findComPort();
+
+    QByteArray m_readData;
+    QTimer m_timer;
+
+signals:
+    void NotifyData();
+
+private slots:
+    void handleReadyRead();
+//    void handleTimeout();
+//    void handleError(QSerialPort::SerialPortError error);
 
 signals:
 

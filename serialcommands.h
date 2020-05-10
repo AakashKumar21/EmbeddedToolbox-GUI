@@ -14,7 +14,9 @@ enum class Cmd{
     AnalogWrite,
     DigitalRead,
     AnalogRead,
-    AnalogConfig
+    AnalogConfig,
+    Sync,
+    DigitalReadouts
 };
 
 enum class PinMode {

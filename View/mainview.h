@@ -20,6 +20,9 @@ public:
 //    MainView() = default;
     ~MainView();
 
+private slots:
+
+
 private:
     Ui::MainView *ui;
     TabSetup &m_tabSetup;

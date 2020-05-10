@@ -1,9 +1,26 @@
 #include "serial.h"
 #include <QDebug>
+#include "View/TabGpio/tabgpiouno.h"
 
 QList<QSerialPortInfo> Serial::m_serialPortList = QSerialPortInfo::availablePorts();
 Serial* Serial::_instance = nullptr;
 
+
+QSerialPort::SerialPortError Serial::Begin(QSerialPort::BaudRate baud)
+{
+    m_qSerialPort = new QSerialPort(this);
+    m_qSerialPort->setPort(m_portInfo);
+    m_qSerialPort->setBaudRate(baud);
+    m_qSerialPort->setDataBits(QSerialPort::Data8);
+    m_qSerialPort->setParity(QSerialPort::NoParity);
+    m_qSerialPort->setStopBits(QSerialPort::OneStop);
+    m_qSerialPort->setFlowControl(QSerialPort::NoFlowControl);
+    m_qSerialPort->open(QIODevice::ReadWrite);
+
+    connect(m_qSerialPort, &QSerialPort::readyRead, this, &Serial::handleReadyRead);
+
+    return m_qSerialPort->error();
+}
 
 Serial* Serial::getInstance() {
    if (_instance == nullptr)
@@ -46,6 +63,7 @@ Serial::Serial(QObject *parent) :
     QObject(parent)
 {
     m_findComPort();
+
 }
 
 Serial::~Serial()
@@ -62,18 +80,6 @@ void Serial::setPort(int port_index)
     qDebug() <<  "Port: " << m_portInfo.portName() << "selected\n";
 }
 
-QSerialPort::SerialPortError Serial::Begin(QSerialPort::BaudRate baud)
-{
-    m_qSerialPort = new QSerialPort(this);
-    m_qSerialPort->setPort(m_portInfo);
-    m_qSerialPort->setBaudRate(baud);
-    m_qSerialPort->setDataBits(QSerialPort::Data8);
-    m_qSerialPort->setParity(QSerialPort::NoParity);
-    m_qSerialPort->setStopBits(QSerialPort::OneStop);
-    m_qSerialPort->setFlowControl(QSerialPort::NoFlowControl);
-    m_qSerialPort->open(QIODevice::ReadWrite);
-    return m_qSerialPort->error();
-}
 
 void Serial::End()
 {
@@ -152,7 +158,42 @@ bool Serial::set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy
     return this->Write(data);
 }
 
+bool Serial::send_Sync()
+{
+    QByteArray data;
+    data.append(static_cast<char>(Cmd::Sync));
+    data.append('0');
+    data.append('0');
+    m_qSerialPort->write(data);
+    return 0;
+}
+
+QByteArray Serial::getData()
+{
+    return m_readData;;
+}
+
 void Serial::m_findComPort()
 {
-   Serial::m_serialPortList = QSerialPortInfo::availablePorts();
+    Serial::m_serialPortList = QSerialPortInfo::availablePorts();
+}
+
+
+void Serial::handleReadyRead()
+{
+    m_readData.append(m_qSerialPort->readAll());
+    int cmd = m_readData[0];
+
+    if(cmd == static_cast<int>(Cmd::DigitalReadouts))
+    {
+        emit NotifyData();
+    }
+//    qDebug() << m_readData;
+    m_readData.clear();
+    if (!m_timer.isActive())
+        m_timer.start(4);
+
+//    qDebug() << "Got:";
+//    qDebug() << m_readData;
+
 }
