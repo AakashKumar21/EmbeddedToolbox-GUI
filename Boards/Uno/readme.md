@@ -1,0 +1,1 @@
+As Pinouts of Uno and Nano are almost same, so this code will work for both.

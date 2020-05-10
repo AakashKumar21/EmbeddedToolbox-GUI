@@ -1,11 +1,15 @@
 #include "Controller.h"
 #include <Arduino.h>
-#define DEBUG(x) Serial.println(x)
+// #define DEBUG(x) Serial.println(x)
+#define DEBUG(x) 
 
 void Controller::set_pinMode(PinMode pinmode,Pin pin)
 {
     pinMode(static_cast<char>(pin), 
             static_cast<char>(pinmode));
+    to_read[static_cast<char>(pin)] =  
+    pinmode == PinMode::PinMode_In ? 0:1;  
+    
     DEBUG("PinMode: ");
     DEBUG(static_cast<int>(pin));
     DEBUG(static_cast<char>(pinmode)? "OUTPUT":"INPUT");
@@ -30,9 +34,25 @@ int Controller::action(char *bytes)
     case static_cast<char>(Cmd::DigitalWrite): 
         set_digitalWrite(static_cast<Pin>(bytes[1]), 
                         static_cast<Output> (bytes[2]));
-        break;
+        break;  
+    case static_cast<char>(Cmd::Sync):
+        loop();
     }
     return 0;
 }
 
+void Controller::loop()
+{
+    // Send digitalReadouts
+
+    Serial.write(static_cast<int>(Cmd::DigitalReadouts));
+    DEBUG(static_cast<int>(Cmd::DigitalReadouts));
+    for(int i=0; i<14; i++)
+    {
+        DEBUG(digitalRead(i));
+        // Serial.write(static_cast<int>(PinMode::PinMode_In));
+        // Serial.write(i);
+        Serial.write(digitalRead(i));
+    }
+}
 Controller::Controller(){}
