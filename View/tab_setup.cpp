@@ -32,6 +32,7 @@ TabSetup::TabSetup(QWidget *parent) :
         m_styleSheets.append(QLatin1String(file.readAll()));
         file.close();
     }
+    qApp->setStyleSheet(m_styleSheets[1]);
 
 }
 
