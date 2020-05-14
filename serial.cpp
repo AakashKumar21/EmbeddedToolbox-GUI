@@ -170,7 +170,7 @@ bool Serial::send_Sync()
 
 QByteArray Serial::getData()
 {
-    return m_readData;;
+    return m_readData;
 }
 
 void Serial::m_findComPort()
@@ -188,7 +188,15 @@ void Serial::handleReadyRead()
     {
         emit NotifyData();
     }
-//    qDebug() << m_readData;
+    else
+    {
+        QVector<int> ascii_data;
+        for (auto &x: m_readData)
+        {
+            ascii_data.append(x);
+        }
+        qDebug() << ascii_data;
+    }
     m_readData.clear();
     if (!m_timer.isActive())
         m_timer.start(4);

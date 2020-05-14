@@ -72,3 +72,4 @@ Thumbs.db
 *.exe
 
 .vs/ArduinoController/v16/Browse.VC.db
+Boards/Uno.zip

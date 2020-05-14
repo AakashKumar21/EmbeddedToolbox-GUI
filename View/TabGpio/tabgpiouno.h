@@ -33,6 +33,7 @@ private:
     QList <QLabel*> m_listReadout;
     void on_PinmodeClicked();
     void on_OutputClicked();
+    void set_Readout(int,bool);
 
 private slots:
     void handleData();

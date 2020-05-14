@@ -8,6 +8,7 @@ class Controller
     int action(char *);
     Controller();
     void loop();
+    void run();
 
     private:
     
@@ -18,6 +19,6 @@ class Controller
     void set_digitalRead(Pin pin);
     void set_AnalogRead(MUX pin);
     void set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy);
-    void send_digitalRead(int);
+    void send_digitalRead();
     bool to_read[14]{0};
 };

@@ -2,6 +2,7 @@
 #include "ui_tabgpiouno.h"
 #include <QDebug>
 #include "serialcommands.h"
+#include <utility>
 
 TabGpioUno::TabGpioUno(QWidget *parent) :
     QWidget(parent),
@@ -119,40 +120,58 @@ void TabGpioUno::on_OutputClicked()
     }
 }
 
+void TabGpioUno::set_Readout(int pin,bool state)
+{
+    if(state)
+    {
+        if(m_listReadout[pin]->isEnabled())
+        {
+            m_listReadout[pin]->setText("High");
+            m_listReadout[pin]->setStyleSheet
+                    ("QLabel { color : Red; }");
+        }
+    }
+    else
+    {
+        if(m_listReadout[pin]->isEnabled())
+        {
+            m_listReadout[pin]->setText("Low");
+            m_listReadout[pin]->setStyleSheet
+                    ("QLabel { color : Sky Blue; }");
+        }
+    }
+}
+
 void TabGpioUno::handleData()
 {
     auto data = m_serialConn->getData();
-//    PinMode cmd = static_cast<PinMode>(static_cast<int>(data[0]));
-//    int index = static_cast<int>(data[1]);
-//    Output output = static_cast<Output>(static_cast<int>(data[2]));
 
-    qDebug() << data;
-
-    for(int i = 1; i<=14; i++)
+    for(int i=0; i<8; i++)
     {
-//        qDebug("%d:%c  ",i,data[i]);
-        if(data[i] == static_cast<char>( Output::Low ))
+        // PORTB
+        if(data[1] & (1<<i))
         {
-            if(m_listReadout[i-1]->isEnabled())
-
-            {
-                m_listReadout[i-1]->setText("Low");
-                m_listReadout[i-1]->setStyleSheet
-                        ("QLabel { color : blue; }");
+            if(i+8 < 14){
+                set_Readout(i+8,true);
             }
         }
         else
         {
-            if(m_listReadout[i-1]->isEnabled())
-            {
-                m_listReadout[i-1]->setText("High");
-                m_listReadout[i-1]->setStyleSheet
-                        ("QLabel { color : Red; }");
+            if(i+8 < 14){
+                set_Readout(i+8,false);
             }
         }
-    }
-//    qDebug() << '\n';
 
+        // PORTD
+        if(data[2] & (1<<i))
+        {
+          set_Readout(i,true); // BUG PRONE
+        }
+        else
+        {
+            set_Readout(i,false);
+        }
+    }
 }
 
 void TabGpioUno::on_btnSync_clicked()
