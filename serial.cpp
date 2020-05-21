@@ -3,7 +3,7 @@
 #include "View/TabGpio/tabgpiouno.h"
 
 QList<QSerialPortInfo> Serial::m_serialPortList = QSerialPortInfo::availablePorts();
-Serial* Serial::_instance = nullptr;
+//Serial* Serial::_instance = nullptr;
 
 
 QSerialPort::SerialPortError Serial::Begin(QSerialPort::BaudRate baud)
@@ -22,13 +22,13 @@ QSerialPort::SerialPortError Serial::Begin(QSerialPort::BaudRate baud)
     return m_qSerialPort->error();
 }
 
-Serial* Serial::getInstance() {
-   if (_instance == nullptr)
-   {
-      _instance = new Serial();
-   }
-   return(_instance);
-}
+//Serial* Serial::getInstance() {
+//   if (_instance == nullptr)
+//   {
+//      _instance = new Serial();
+//   }
+//   return(_instance);
+//}
 
 bool Serial::Write(QByteArray data)
 {
@@ -62,16 +62,43 @@ bool Serial::Write(QByteArray data)
 Serial::Serial(QObject *parent) :
     QObject(parent)
 {
+    Begin(QSerialPort::Baud115200);
     m_findComPort();
+    getComPortList();
+}
 
+//QStringList Serial::portList()
+//{
+////    m_portNameList.clear();
+////    for(auto &x: m_serialPortList)
+////    {
+////        m_portNameList.append(x.portName());
+////    }
+////    return m_portNameList;
+//    QStringList x;
+//    return x;
+//}
+
+
+void Serial::refreshPortList(bool arg)
+{
+    m_findComPort();
+    qDebug() << "Refresh";
+}
+
+void Serial::onClick(bool arg)
+{
+    qDebug() << "Clicked: " << arg;
+    m_findComPort();
+    emit onClickRefresh();
 }
 
 Serial::~Serial()
 {
-    if(_instance != nullptr){
-        _instance->End();
-    }
-    delete _instance;
+//    if(_instance != nullptr){
+//        _instance->End();
+//    }
+//    delete _instance;
 }
 
 void Serial::setPort(int port_index)
@@ -96,6 +123,7 @@ QStringList Serial::getComPortList()
     {
         portList.append(x.portName());
     }
+    qDebug() << portList;
     return portList;
 }
 

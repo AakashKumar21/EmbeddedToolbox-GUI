@@ -12,15 +12,21 @@
 class Serial : public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(QStringList portList READ getComPortList NOTIFY onClickRefresh)
+    Q_PROPERTY(bool clicked WRITE onClick)
+//    Q_PROPERTY(QString pin_no WRITE setId)
+
 public:
 
-    static Serial* getInstance();
+    explicit Serial(QObject *parent = nullptr);
+    ~Serial();
     bool Write(QByteArray);
     QSerialPort::SerialPortError getInfo() const; //  Will return SerialInfo including connected/disconnected
     void setPort(int port_index); // index of QList<QSerialPortInfo>
     QSerialPort::SerialPortError Begin(enum QSerialPort::BaudRate);
     void End();
-    static QStringList getComPortList();//CONST // Returns list of COM ports to be added to drop down menu
+    QStringList getComPortList();//CONST // Returns list of COM ports to be added to drop down menu
     // Setters
     bool set_pinMode(PinMode pinmode,Pin pin);
     bool set_digitalWrite(Pin pin, Output output) ;
@@ -34,17 +40,21 @@ public:
 signals:
 //    void NotifyConnected();
 //    void NotifyDisconnected();
+    void onClickRefresh();
 
 private slots:
 //    void onConnected();
 //    void onDisconnected();
 
 private:
-    static Serial* _instance;
-    explicit Serial(QObject *parent = nullptr);
-    Serial(const Serial&);
-    Serial& operator=(const Serial&);
-    ~Serial();
+//    static Serial* _instance;
+
+//    Serial(const Serial&);
+//    Serial& operator=(const Serial&);
+
+    QStringList portList();
+    void refreshPortList(bool arg);
+    void onClick(bool arg);
 
     QSerialPortInfo m_portInfo;
     QSerialPort *m_qSerialPort;
@@ -53,6 +63,7 @@ private:
 
     QByteArray m_readData;
     QTimer m_timer;
+    QStringList m_portNameList;
 
 signals:
     void NotifyData();

@@ -1,7 +1,7 @@
 #ifndef TAB_SETUP_H
 #define TAB_SETUP_H
 
-#include <QWidget>
+#include <QObject>
 #include "serial.h"
 #include <QDir>
 
@@ -9,12 +9,12 @@ namespace Ui {
 class tab_setup;
 }
 
-class TabSetup : public QWidget
+class TabSetup : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit TabSetup(QWidget *parent = nullptr);
+    explicit TabSetup(QObject *parent = nullptr);
     ~TabSetup();
 
 private slots:
@@ -32,7 +32,7 @@ private slots:
 private:
     Ui::tab_setup *ui;
     QStringList m_styleSheets;
-    Serial &m_serialConn;
+//    Serial &m_serialConn;
 };
 
 #endif // TAB_SETUP_H

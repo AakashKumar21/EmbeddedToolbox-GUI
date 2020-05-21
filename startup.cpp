@@ -1,23 +1,15 @@
 #include "startup.h"
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #include <QDebug>
+#include "View/TabGpio/tabgpiouno.h"
+#include "serial.h"
 
-Startup::Startup():
-    QObject(nullptr),
-    m_tabSetup(new TabSetup(nullptr)),
-    m_tabGpioUno(new TabGpioUno(nullptr)),
-    m_tabAdcUno(new TabAdcUno(nullptr)),
-    m_mainView(new MainView(nullptr, *m_tabSetup,*m_tabGpioUno, *m_tabAdcUno))
+Startup::Startup(void)
 {
+    qmlRegisterType<TabGpioUno>("com.tabGpioUno",1,0,"TabGpioUno");
+    qmlRegisterType<Serial>("com.Serial",1,0,"Serial");
+//    m_serial = Serial::getInstance();
 }
 
-void Startup::show() const
-{
-    m_mainView->show();
-}
-
-
-Startup::~Startup()
-{
-    Utils::DestructorMsg(*this);
-    m_mainView->~MainView();
-}

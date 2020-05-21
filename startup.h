@@ -14,13 +14,14 @@ class Startup final: public QObject
 public:
     explicit Startup();
     void show() const;
-    ~Startup();
+//    ~Startup();
 
 private:
-    TabSetup *m_tabSetup;
-    TabGpioUno *m_tabGpioUno;
-    TabAdcUno *m_tabAdcUno;
-    MainView *m_mainView;
+//    TabSetup *m_tabSetup;
+//    TabGpioUno *m_tabGpioUno;
+//    TabAdcUno *m_tabAdcUno;
+//    MainView *m_mainView;
+    Serial *m_serial;
 
     QJsonObject GetJsonObject(const QString& rawJson);
 

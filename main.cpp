@@ -1,16 +1,20 @@
-#include <QApplication>
-#include "startup.h"
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #include <QDebug>
+#include "startup.h"
 
 int main(int argc, char *argv[])
 {
-//    QCoreApplication::addLibraryPath("C:/Qt/5.12.8/msvc2017/plugins");
-//    QCoreApplication::addLibraryPath(".");
-    auto lst=QCoreApplication::libraryPaths();
-
-    qDebug() << lst;
-    QApplication a(argc, argv);
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication app(argc, argv);
     Startup w;
-    w.show();
-    return a.exec();
+    QQuickStyle::setStyle("Material");
+
+    QQmlApplicationEngine engine;
+    engine.load(QUrl("qrc:/main.qml"));
+
+
+
+    return app.exec();
 }

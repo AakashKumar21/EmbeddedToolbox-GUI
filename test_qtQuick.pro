@@ -39,10 +39,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    main.qml \
-    pin_ctrl_grp.qml \
-    tab_gpio.qml \
-    tab_setup.qml
+    tab_gpio.qml
 
 HEADERS += \
     startup.h \

@@ -1,22 +1,23 @@
 #ifndef MAINVIEW_H
 #define MAINVIEW_H
 
-#include <QMainWindow>
-#include "ui_mainview.h"
+//#include <QMainWindow>
+//#include "ui_mainview.h"
 #include "View/tab_setup.h"
 #include "View/TabGpio/tabgpiouno.h"
 #include "View/TabAdc/tabadcuno.h"
+#include <QObject>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainView; }
 QT_END_NAMESPACE
 
-class MainView : public QMainWindow
+class MainView : public QObject
 {
     Q_OBJECT
 
 public:
-    MainView(QWidget *parent,TabSetup &gpio,TabGpioUno &gpio_uno, TabAdcUno &adc_uno);
+    MainView(QObject *parent,TabSetup &gpio,TabGpioUno &gpio_uno, TabAdcUno &adc_uno);
 //    MainView() = default;
     ~MainView();
 
