@@ -15,6 +15,9 @@ class Serial : public QObject
 
     Q_PROPERTY(QStringList portList READ getComPortList NOTIFY onClickRefresh)
     Q_PROPERTY(bool clicked WRITE onClick)
+    Q_PROPERTY(bool comPort WRITE setPort)
+//    Q_PROPERTY(bool connectSerial WRITE Begin)
+
 //    Q_PROPERTY(QString pin_no WRITE setId)
 
 public:
@@ -26,7 +29,6 @@ public:
     void setPort(int port_index); // index of QList<QSerialPortInfo>
     QSerialPort::SerialPortError Begin(enum QSerialPort::BaudRate);
     void End();
-    QStringList getComPortList();//CONST // Returns list of COM ports to be added to drop down menu
     // Setters
     bool set_pinMode(PinMode pinmode,Pin pin);
     bool set_digitalWrite(Pin pin, Output output) ;
@@ -36,6 +38,13 @@ public:
     bool set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy) ;
     bool send_Sync();
     QByteArray getData();
+
+public slots:
+    void test(QString x);
+    // Refresh ComPortList
+    void refresh();
+    //Returns List of COM ports to be added to drop down menu
+    QStringList getComPortList();
 
 signals:
 //    void NotifyConnected();

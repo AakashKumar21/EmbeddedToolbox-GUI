@@ -6,9 +6,8 @@ QList<QSerialPortInfo> Serial::m_serialPortList = QSerialPortInfo::availablePort
 //Serial* Serial::_instance = nullptr;
 
 
-QSerialPort::SerialPortError Serial::Begin(QSerialPort::BaudRate baud)
+QSerialPort::SerialPortError Serial::Begin(QSerialPort::BaudRate baud = QSerialPort::Baud115200)
 {
-    m_qSerialPort = new QSerialPort(this);
     m_qSerialPort->setPort(m_portInfo);
     m_qSerialPort->setBaudRate(baud);
     m_qSerialPort->setDataBits(QSerialPort::Data8);
@@ -62,7 +61,7 @@ bool Serial::Write(QByteArray data)
 Serial::Serial(QObject *parent) :
     QObject(parent)
 {
-    Begin(QSerialPort::Baud115200);
+    m_qSerialPort = new QSerialPort(this);
     m_findComPort();
     getComPortList();
 }
@@ -90,7 +89,6 @@ void Serial::onClick(bool arg)
 {
     qDebug() << "Clicked: " << arg;
     m_findComPort();
-    emit onClickRefresh();
 }
 
 Serial::~Serial()
@@ -199,6 +197,17 @@ bool Serial::send_Sync()
 QByteArray Serial::getData()
 {
     return m_readData;
+}
+
+void Serial::test(QString x)
+{
+    qDebug() << "Test is working" << x;
+}
+
+void Serial::refresh()
+{
+    m_findComPort();
+    emit onClickRefresh();
 }
 
 void Serial::m_findComPort()

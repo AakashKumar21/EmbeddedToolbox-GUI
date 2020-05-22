@@ -29,8 +29,12 @@ GroupBox{
                 text: qsTr("Port:")
             }
             ComboBox {
+                id: dropdownPorts
                 flat: false
                 model: serial.portList
+                onCurrentIndexChanged: {
+
+                }
             }
             // Board
             Rectangle{
@@ -57,7 +61,7 @@ GroupBox{
             Button{
                 text: qsTr("Refresh")
                 onClicked: {
-                    serial.clicked = true
+                    serial.refresh()
                 }
             }
         }

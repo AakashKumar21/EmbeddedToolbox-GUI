@@ -59,7 +59,7 @@ void TabGpioUno::m_init_gui()
 //                this, &TabGpioUno::on_OutputClicked);
     }
 
-    connect(m_serialConn, &Serial::NotifyData , this , &TabGpioUno::handleData );
+//    connect(m_serialConn, &Serial::NotifyData , this , &TabGpioUno::handleData );
 }
 
 void TabGpioUno::on_PinmodeClicked()
