@@ -15,9 +15,9 @@ GroupBox{
     }
 
     GroupBox {
-        id: groupBox
-        x: 8
-        y: 7
+        id: lo_connection
+        x: 10
+        y: 10
         width: parent.width - 20
 
         height: 100
@@ -30,10 +30,9 @@ GroupBox{
             }
             ComboBox {
                 id: dropdownPorts
-                flat: false
                 model: serial.portList
                 onCurrentIndexChanged: {
-
+                       serial.port = currentIndex
                 }
             }
             // Board
@@ -45,6 +44,16 @@ GroupBox{
             }
             ComboBox {
             }
+            //Port
+            Rectangle{
+                width: 10
+            }
+            Label{
+                text: qsTr("Baud Rate:")
+            }
+            ComboBox {
+            }
+
             // Connect Button
             Rectangle{
                 width: 10
@@ -53,19 +62,23 @@ GroupBox{
                 text: qsTr("Connect")
                 checkable: true
                 checked: false
+                onClicked: {
+                    serial.connected = checked
+                }
             }
-            // Refresh Button
+            // Connect Button
             Rectangle{
                 width: 10
             }
             Button{
-                text: qsTr("Refresh")
+                text: qsTr("Refesh")
                 onClicked: {
                     serial.refresh()
                 }
             }
+
         }
-    }
+    }   
 }
 
 

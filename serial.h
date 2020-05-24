@@ -16,7 +16,9 @@ class Serial : public QObject
     Q_PROPERTY(QStringList portList READ getComPortList NOTIFY onClickRefresh)
     Q_PROPERTY(bool clicked WRITE onClick)
     Q_PROPERTY(bool comPort WRITE setPort)
-//    Q_PROPERTY(bool connectSerial WRITE Begin)
+
+    Q_PROPERTY(bool connected READ isConnected WRITE Connect)
+    Q_PROPERTY(int port WRITE setPort)
 
 //    Q_PROPERTY(QString pin_no WRITE setId)
 
@@ -26,7 +28,7 @@ public:
     ~Serial();
     bool Write(QByteArray);
     QSerialPort::SerialPortError getInfo() const; //  Will return SerialInfo including connected/disconnected
-    void setPort(int port_index); // index of QList<QSerialPortInfo>
+    void setPort(int port_index = 0 ); // index of QList<QSerialPortInfo>
     QSerialPort::SerialPortError Begin(enum QSerialPort::BaudRate);
     void End();
     // Setters
@@ -65,10 +67,14 @@ private:
     void refreshPortList(bool arg);
     void onClick(bool arg);
 
+    bool isConnected();
+    void Connect(bool);
+
     QSerialPortInfo m_portInfo;
     QSerialPort *m_qSerialPort;
     static QList<QSerialPortInfo> m_serialPortList;
     static void m_findComPort();
+    bool m_connected;
 
     QByteArray m_readData;
     QTimer m_timer;

@@ -64,6 +64,7 @@ Serial::Serial(QObject *parent) :
     m_qSerialPort = new QSerialPort(this);
     m_findComPort();
     getComPortList();
+    m_connected = false;
 }
 
 //QStringList Serial::portList()
@@ -91,6 +92,19 @@ void Serial::onClick(bool arg)
     m_findComPort();
 }
 
+bool Serial::isConnected()
+{
+    return m_connected;
+}
+
+void Serial::Connect(bool arg)
+{
+    qDebug() << "Connect:" << arg;
+    if(arg) Begin();
+    else End();
+
+}
+
 Serial::~Serial()
 {
 //    if(_instance != nullptr){
@@ -108,8 +122,7 @@ void Serial::setPort(int port_index)
 
 void Serial::End()
 {
-    delete m_qSerialPort;
-    m_qSerialPort = nullptr;
+    m_qSerialPort->close();
 }
 
 QStringList Serial::getComPortList()
@@ -242,3 +255,4 @@ void Serial::handleReadyRead()
 //    qDebug() << m_readData;
 
 }
+
