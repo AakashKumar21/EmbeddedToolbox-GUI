@@ -16,13 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         startup.cpp \
-        View/TabGpio/tabgpiouno.cpp \
-        View/TabAdc/tabadcuno.cpp \
-        View\mainview.cpp \
-        View\tab_setup.cpp \
         serial.cpp \
         settings.cpp \
-        startup.cpp \
         utils.cpp
 
 RESOURCES += qml.qrc
@@ -45,11 +40,7 @@ DISTFILES += \
     tab_setup.qml
 
 HEADERS += \
-    startup.h \
-    View/TabAdc/tabadcuno.h \
-    View/TabGpio/tabgpiouno.h \
-    View\mainview.h \
-    View\tab_setup.h \
+    QmlEngineGlobal.h \
     serial.h \
     serialcommands.h \
     settings.h \

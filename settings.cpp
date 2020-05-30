@@ -1,4 +1,3 @@
-#include "settings.h"
 #include <QString>
 #include <QDir>
 #include <QFile>

@@ -4,8 +4,16 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Styles 1.4
 
-
 ColumnLayout{
+//    property string name: value
+
+    Timer {
+        interval: 2000; running: true; repeat: true
+        onTriggered: {
+            label_readout.text = serial.getReadouts(parseInt(parent.objectName))
+        }
+    }
+
     // PinMode
     CheckBox {
             objectName: 'p' + parent.objectName
@@ -26,8 +34,10 @@ ColumnLayout{
             }
         }
     Label {
-        text: qsTr("Low")
-        }
+        id: label_readout
+
+//        text: serial.getReadouts(parseInt(parent.objectName))
+    }
 }
 
 

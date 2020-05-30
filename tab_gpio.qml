@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
-import com.tabGpioUno 1.0
+import com.Serial 1.0
 import "object_creator.js" as Create
 
 
@@ -11,6 +11,10 @@ GroupBox{
     id:lo_control_box
     height: main.height - 70
     width: main.width - 20
+//    property string pin_readouts: serial.getReadoutsAll()
+
+
+
 
     ColumnLayout{
         id: lo_labels

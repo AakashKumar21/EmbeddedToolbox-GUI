@@ -10,10 +10,6 @@ GroupBox{
     height: main.height - 70
     width: main.width - 20
 
-    Serial{
-        id: serial
-    }
-
     GroupBox {
         id: lo_connection
         x: 10

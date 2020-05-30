@@ -5,22 +5,22 @@
 #include <QSerialPortInfo>
 #include <QSerialPort>
 #include <QTimer>
-#include "serialcommands.h"
 #include <QVector>
+#include <QArrayData>
+#include "serialcommands.h"
 
-// This in singleton class
 class Serial : public QObject
 {
     Q_OBJECT
 
     Q_PROPERTY(QStringList portList READ getComPortList NOTIFY onClickRefresh)
-    Q_PROPERTY(bool clicked WRITE onClick)
+//    Q_PROPERTY(bool clicked WRITE onClick)
     Q_PROPERTY(bool comPort WRITE setPort)
 
     Q_PROPERTY(bool connected READ isConnected WRITE Connect)
     Q_PROPERTY(int port WRITE setPort)
-
-//    Q_PROPERTY(QString pin_no WRITE setId)
+//    Q_PROPERTY(int pin_readout READ getReadouts WRITE setReadPin NOTIFY onGpioDataRecv)
+//    Q_PROPERTY(QString readouts READ getReadouts WRITE readoutPin NOTIFY onGpioDataRecv)
 
 public:
 
@@ -41,21 +41,28 @@ public:
     bool send_Sync();
     QByteArray getData();
 
+Q_INVOKABLE QVector<QString> getReadoutsAll();
+
+signals:
+    void NotifyData();
+    //    void NotifyConnected();
+    //    void NotifyDisconnected();
+    void onClickRefresh();
+    void onGpioDataRecv();
+
 public slots:
     void test(QString x);
     // Refresh ComPortList
     void refresh();
     //Returns List of COM ports to be added to drop down menu
     QStringList getComPortList();
-
-signals:
-//    void NotifyConnected();
-//    void NotifyDisconnected();
-    void onClickRefresh();
+    void setReadPin(int);
+    QString getReadouts(int pin) const;
 
 private slots:
-//    void onConnected();
-//    void onDisconnected();
+    void handleReadyRead();
+//    void handleTimeout();
+//    void handleError(QSerialPort::SerialPortError error);
 
 private:
 //    static Serial* _instance;
@@ -75,20 +82,13 @@ private:
     static QList<QSerialPortInfo> m_serialPortList;
     static void m_findComPort();
     bool m_connected;
+    int m_pinNo;
+    QVector<QString> m_gpioData;
 
     QByteArray m_readData;
     QTimer m_timer;
     QStringList m_portNameList;
 
-signals:
-    void NotifyData();
-
-private slots:
-    void handleReadyRead();
-//    void handleTimeout();
-//    void handleError(QSerialPort::SerialPortError error);
-
-signals:
 
 };
 

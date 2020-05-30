@@ -26,7 +26,7 @@ void loop() {
         len = 0;
         Control.action(bytes);
     }
-    if(current - prev >= 2000)
+    if(current - prev >= 500)
     {
         prev = current;
         Control.loop();

@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
+import com.Serial 1.0
 
 ApplicationWindow {
     id: main
@@ -9,6 +10,10 @@ ApplicationWindow {
     width: 1024
 
     visible: true
+
+    Serial{
+        id: serial
+    }
 
     TabBar {
         id: bar
@@ -45,7 +50,7 @@ ApplicationWindow {
             }
         }
         Item {
-            id: discoverTab
+            id: tabSetup
             Loader{
                 x: 10
                 y: 10

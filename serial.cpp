@@ -1,6 +1,7 @@
 #include "serial.h"
 #include <QDebug>
-#include "View/TabGpio/tabgpiouno.h"
+#include "QmlEngineGlobal.h"
+#include "serialcommands.h"
 
 QList<QSerialPortInfo> Serial::m_serialPortList = QSerialPortInfo::availablePorts();
 //Serial* Serial::_instance = nullptr;
@@ -65,7 +66,76 @@ Serial::Serial(QObject *parent) :
     m_findComPort();
     getComPortList();
     m_connected = false;
+    m_gpioData.resize(14);
 }
+
+QString Serial::getReadouts(int pin) const
+{
+    if(m_readData.size() == 0 ) return "-1";
+
+    if(pin > 8) {
+        if(m_readData[1] & (1<<pin)){
+            return "High";
+        }
+        else return "Low";
+    }
+    else {
+        if(m_readData[2] & (1<<pin)){
+            return "High";
+        }
+        else return "Low";
+    }
+}
+
+QVector<QString> Serial::getReadoutsAll()
+{
+    int cmd = m_readData[0];
+    int portB = m_readData[1];
+    int portD = m_readData[2];
+    qDebug() << "getReadoutsAll" << this-> m_readData;
+    qDebug() << "this address:" << this;
+
+    if(cmd == static_cast<int>(Cmd::DigitalReadouts))
+    {
+
+        for(int i=0; i<8; i++)
+        {
+
+
+            // PORTB
+            if(portB & (1<<i))
+            {
+                if(i+8 < 14){
+                    m_gpioData[i+8] = "1";
+                }
+            }
+            else
+            {
+                if(i+8 < 14){
+                    m_gpioData[i+8] = "0";
+                }
+            }
+
+            // PORTD
+            if(portD & (1<<i))
+            {
+              m_gpioData[i] = "1"; // BUG PRONE
+            }
+            else
+            {
+                m_gpioData[i] = "0";
+            }
+        }
+        qDebug() <<"got gpio data" << m_gpioData;
+    }
+    return m_gpioData;
+}
+
+void Serial::setReadPin(int pin)
+{
+    m_pinNo = pin;
+}
+
 
 //QStringList Serial::portList()
 //{
@@ -83,7 +153,7 @@ Serial::Serial(QObject *parent) :
 void Serial::refreshPortList(bool arg)
 {
     m_findComPort();
-    qDebug() << "Refresh";
+    qDebug() << "Refresh" << arg;
 }
 
 void Serial::onClick(bool arg)
@@ -94,14 +164,21 @@ void Serial::onClick(bool arg)
 
 bool Serial::isConnected()
 {
+    qDebug()<< "is conncted:" << m_connected;
     return m_connected;
 }
 
 void Serial::Connect(bool arg)
 {
-    qDebug() << "Connect:" << arg;
-    if(arg) Begin();
-    else End();
+    if(arg){
+        Begin();
+        m_connected = true;
+    }
+    else {
+        End();
+        m_connected = false;
+    }
+    qDebug() << "Connect:" << m_connected;
 
 }
 
@@ -136,6 +213,7 @@ QStringList Serial::getComPortList()
     }
     qDebug() << portList;
     return portList;
+
 }
 
 bool Serial::set_pinMode(PinMode pinMode, Pin pin)
@@ -144,6 +222,7 @@ bool Serial::set_pinMode(PinMode pinMode, Pin pin)
     data.append(static_cast<char>(Cmd::PinMode));
     data.append(static_cast<char>(pinMode));
     data.append(static_cast<char>(pin));
+
 
     return this->Write(data);
 }
@@ -231,28 +310,24 @@ void Serial::m_findComPort()
 
 void Serial::handleReadyRead()
 {
-    m_readData.append(m_qSerialPort->readAll());
-    int cmd = m_readData[0];
-
-    if(cmd == static_cast<int>(Cmd::DigitalReadouts))
-    {
-        emit NotifyData();
-    }
-    else
-    {
-        QVector<int> ascii_data;
-        for (auto &x: m_readData)
-        {
-            ascii_data.append(x);
-        }
-        qDebug() << ascii_data;
-    }
     m_readData.clear();
+    m_readData = m_qSerialPort->readAll();
+//    int cmd = m_readData[0];
+//    int portB = m_readData[1];
+//    int portD = m_readData[2];
+
+//    QVector<int> data_int;
+//    for(auto &x: m_readData)
+//    {
+//        data_int.append(x);
+//    }
+    qDebug() << "Recv:";
+    qDebug() << m_readData;
+    qDebug() << "this address:" << this;
+
     if (!m_timer.isActive())
         m_timer.start(4);
-
-//    qDebug() << "Got:";
-//    qDebug() << m_readData;
-
+//    qDebug() << "Gpio Data Recv";
+//    qDebug() <<  m_gpioData;
 }
 

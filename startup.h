@@ -2,11 +2,7 @@
 #define STARTUP_H
 
 #include <QObject>
-#include "View/mainview.h"
-#include "View/tab_setup.h"
-#include "View/TabGpio/tabgpiouno.h"
-#include "View/TabAdc/tabadcuno.h"
-#include "utils.h"
+#include "serial.h"
 
 class Startup final: public QObject
 {
