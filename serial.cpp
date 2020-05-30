@@ -71,63 +71,25 @@ Serial::Serial(QObject *parent) :
 
 QString Serial::getReadouts(int pin) const
 {
-    if(m_readData.size() == 0 ) return "-1";
+    return m_gpioData[pin];
+}
 
-    if(pin > 8) {
-        if(m_readData[1] & (1<<pin)){
-            return "High";
-        }
-        else return "Low";
-    }
-    else {
-        if(m_readData[2] & (1<<pin)){
-            return "High";
-        }
-        else return "Low";
-    }
+void Serial::qmlSetOutput(int pin, bool output)
+{
+    auto _pin = static_cast<Pin>(pin);
+    auto _output = static_cast<Output>(output);
+    set_digitalWrite(_pin, _output);
+}
+
+void Serial::qmlSetPinMode(int pin, bool pinmode)
+{
+    auto _pin = static_cast<Pin>(pin);
+    auto _pinmode = static_cast<PinMode>(pinmode);
+    set_pinMode(_pinmode, _pin);
 }
 
 QVector<QString> Serial::getReadoutsAll()
 {
-    int cmd = m_readData[0];
-    int portB = m_readData[1];
-    int portD = m_readData[2];
-    qDebug() << "getReadoutsAll" << this-> m_readData;
-    qDebug() << "this address:" << this;
-
-    if(cmd == static_cast<int>(Cmd::DigitalReadouts))
-    {
-
-        for(int i=0; i<8; i++)
-        {
-
-
-            // PORTB
-            if(portB & (1<<i))
-            {
-                if(i+8 < 14){
-                    m_gpioData[i+8] = "1";
-                }
-            }
-            else
-            {
-                if(i+8 < 14){
-                    m_gpioData[i+8] = "0";
-                }
-            }
-
-            // PORTD
-            if(portD & (1<<i))
-            {
-              m_gpioData[i] = "1"; // BUG PRONE
-            }
-            else
-            {
-                m_gpioData[i] = "0";
-            }
-        }
-        qDebug() <<"got gpio data" << m_gpioData;
-    }
     return m_gpioData;
 }
 
@@ -312,18 +274,42 @@ void Serial::handleReadyRead()
 {
     m_readData.clear();
     m_readData = m_qSerialPort->readAll();
-//    int cmd = m_readData[0];
-//    int portB = m_readData[1];
-//    int portD = m_readData[2];
+    int cmd = m_readData[0];
+    int portB = m_readData[1];
+    int portD = m_readData[2];
 
-//    QVector<int> data_int;
-//    for(auto &x: m_readData)
-//    {
-//        data_int.append(x);
-//    }
-    qDebug() << "Recv:";
-    qDebug() << m_readData;
-    qDebug() << "this address:" << this;
+    if(cmd == static_cast<int>(Cmd::DigitalReadouts))
+    {
+
+        for(int i=0; i<8; i++)
+        {
+
+
+            // PORTB
+            if(portB & (1<<i))
+            {
+                if(i+8 < 14){
+                    m_gpioData[i+8] = "1";
+                }
+            }
+            else
+            {
+                if(i+8 < 14){
+                    m_gpioData[i+8] = "0";
+                }
+            }
+
+            // PORTD
+            if(portD & (1<<i))
+            {
+              m_gpioData[i] = "1"; // BUG PRONE
+            }
+            else
+            {
+                m_gpioData[i] = "0";
+            }
+        }
+    }
 
     if (!m_timer.isActive())
         m_timer.start(4);

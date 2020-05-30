@@ -8,19 +8,25 @@ ColumnLayout{
 //    property string name: value
 
     Timer {
-        interval: 2000; running: true; repeat: true
+        interval: 100; running: true; repeat: true
         onTriggered: {
             label_readout.text = serial.getReadouts(parseInt(parent.objectName))
+            label_readout.read_value = parseInt(serial.getReadouts(parseInt(parent.objectName)))
+            label_readout.color = label_readout.read_value ? "red" : "blue"
         }
+    }
+
+    //Pins
+    Text {
+        text: "D" + parent.objectName
+        leftPadding: 14
     }
 
     // PinMode
     CheckBox {
             objectName: 'p' + parent.objectName
             onCheckStateChanged: {
-//                tabgpio.pinModes = checkState
-//                checked  = tabgpio.pinModes
-//                tabgpio.pin_no = objectName
+                serial.qmlSetPinMode(parseInt(parent.objectName), checked);
             }
         }
 
@@ -28,13 +34,13 @@ ColumnLayout{
     CheckBox {
             objectName: 'o' + parent.objectName
             onCheckStateChanged: {
-//                tabgpio.pinModes = checkState
-//                checked  = tabgpio.pinModes
-//                tabgpio.pin_no = objectName
+                serial.qmlSetOutput(parseInt(parent.objectName), checked);
             }
         }
-    Label {
+    Text {
         id: label_readout
+        property bool read_value
+        leftPadding: 15
 
 //        text: serial.getReadouts(parseInt(parent.objectName))
     }

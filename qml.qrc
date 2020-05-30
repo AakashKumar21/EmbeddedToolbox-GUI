@@ -3,7 +3,7 @@
         <file>main.qml</file>
         <file>tab_gpio.qml</file>
         <file>pin_ctrl_grp.qml</file>
-        <file>object_creator.js</file>
+        <file>pin_ctrl_creator.js</file>
         <file>tab_setup.qml</file>
     </qresource>
 </RCC>

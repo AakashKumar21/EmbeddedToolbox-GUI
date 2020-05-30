@@ -19,6 +19,8 @@ class Serial : public QObject
 
     Q_PROPERTY(bool connected READ isConnected WRITE Connect)
     Q_PROPERTY(int port WRITE setPort)
+//    Q_PROPERTY(bool pinMode WRITE qmlSetPinMode)
+//    Q_PROPERTY(bool pinMode WRITE qmlSetOutput)
 //    Q_PROPERTY(int pin_readout READ getReadouts WRITE setReadPin NOTIFY onGpioDataRecv)
 //    Q_PROPERTY(QString readouts READ getReadouts WRITE readoutPin NOTIFY onGpioDataRecv)
 
@@ -58,6 +60,8 @@ public slots:
     QStringList getComPortList();
     void setReadPin(int);
     QString getReadouts(int pin) const;
+    void qmlSetOutput(int,bool);
+    void qmlSetPinMode(int,bool);
 
 private slots:
     void handleReadyRead();
