@@ -8,7 +8,7 @@ ColumnLayout{
 //    property string name: value
 
     Timer {
-        interval: 50; running: true; repeat: true
+        interval: 50; running: false; repeat: true
         onTriggered: {
             label_readout.text = serial.getReadouts(parseInt(parent.objectName))
             label_readout.read_value = parseInt(serial.getReadouts(parseInt(parent.objectName)))
@@ -42,6 +42,12 @@ ColumnLayout{
         id: label_readout
         property bool read_value
         leftPadding: 15
+//        property bool values: serial.test_val
+//        onTextChanged:{
+//            serial.test_val = parseInt(parent.objectName)
+//            text = serial.test_val
+//        }
+        text: serial.readouts_arr[parseInt(parent.objectName)]
 
 //        text: serial.getReadouts(parseInt(parent.objectName))
     }

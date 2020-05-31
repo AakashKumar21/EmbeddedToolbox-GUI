@@ -13,6 +13,10 @@ ApplicationWindow {
 
     Serial{
         id: serial
+        onOnNotifyDatRecv: {
+            readouts_arr = serial.getReadoutsAll()
+        }
+        property var readouts_arr
     }
 
     TabBar {

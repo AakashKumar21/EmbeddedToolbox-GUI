@@ -53,6 +53,7 @@ Item{
                 width: 10
             }
             Button{
+                id: btn_connect
                 text: qsTr("Connect")
                 checkable: true
                 checked: false
@@ -69,6 +70,11 @@ Item{
                 onClicked: {
                     serial.refresh()
                 }
+            }
+            // Test
+            Text {
+                id: name
+                text: qsTr("text")
             }
 
         }

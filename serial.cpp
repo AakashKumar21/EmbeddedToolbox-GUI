@@ -68,11 +68,6 @@ Serial::Serial(QObject *parent) :
     m_gpioData.resize(14);
 }
 
-QString Serial::getReadouts(int pin) const
-{
-    return m_gpioData[pin];
-}
-
 void Serial::qmlSetOutput(int pin, bool output)
 {
     auto _pin = static_cast<Pin>(pin);
@@ -87,14 +82,10 @@ void Serial::qmlSetPinMode(int pin, bool pinmode)
     set_pinMode(_pinmode, _pin);
 }
 
+
 QVector<QString> Serial::getReadoutsAll()
 {
     return m_gpioData;
-}
-
-void Serial::setReadPin(int pin)
-{
-    m_pinNo = pin;
 }
 
 
@@ -111,13 +102,13 @@ void Serial::setReadPin(int pin)
 //}
 
 
-void Serial::refreshPortList(bool arg)
+void Serial::refreshPortList(bool arg) const
 {
     m_findComPort();
     qDebug() << "Refresh" << arg;
 }
 
-void Serial::onClick(bool arg)
+void Serial::onClick(bool arg) const
 {
     qDebug() << "Clicked: " << arg;
     m_findComPort();
@@ -163,7 +154,7 @@ void Serial::End()
     m_qSerialPort->close();
 }
 
-QStringList Serial::getComPortList()
+QStringList Serial::getComPortList() const
 {
 //   auto ports = QSerialPortInfo::availablePorts();
     m_findComPort();
@@ -276,6 +267,8 @@ void Serial::handleReadyRead()
     int cmd = m_readData[0];
     int portB = m_readData[1];
     int portD = m_readData[2];
+
+    emit onNotifyDatRecv();
 
     if(cmd == static_cast<int>(Cmd::DigitalReadouts))
     {

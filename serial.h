@@ -19,6 +19,8 @@ class Serial : public QObject
 
     Q_PROPERTY(bool connected READ isConnected WRITE Connect)
     Q_PROPERTY(int port WRITE setPort)
+    Q_PROPERTY(NOTIFY onNotifyDatRecv)
+
 //    Q_PROPERTY(bool pinMode WRITE qmlSetPinMode)
 //    Q_PROPERTY(bool pinMode WRITE qmlSetOutput)
 //    Q_PROPERTY(int pin_readout READ getReadouts WRITE setReadPin NOTIFY onGpioDataRecv)
@@ -51,15 +53,14 @@ signals:
     //    void NotifyDisconnected();
     void onClickRefresh();
     void onGpioDataRecv();
+    void onNotifyDatRecv();
 
 public slots:
     void test(QString x);
     // Refresh ComPortList
     void refresh();
     //Returns List of COM ports to be added to drop down menu
-    QStringList getComPortList();
-    void setReadPin(int);
-    QString getReadouts(int pin) const;
+    QStringList getComPortList() const;
     void qmlSetOutput(int,bool);
     void qmlSetPinMode(int,bool);
 
@@ -74,9 +75,9 @@ private:
 //    Serial(const Serial&);
 //    Serial& operator=(const Serial&);
 
-    QStringList portList();
-    void refreshPortList(bool arg);
-    void onClick(bool arg);
+    QStringList portList() const;
+    void refreshPortList(bool arg) const;
+    void onClick(bool arg) const;
 
     bool isConnected();
     void Connect(bool);
