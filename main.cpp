@@ -7,7 +7,6 @@
 #include <QQuickView>
 
 #include "startup.h"
-#include "QmlEngineGlobal.h"
 
 int main(int argc, char *argv[])
 {

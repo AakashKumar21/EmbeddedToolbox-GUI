@@ -5,5 +5,10 @@
         <file>pin_ctrl_grp.qml</file>
         <file>pin_ctrl_creator.js</file>
         <file>tab_setup.qml</file>
+        <file>tab_adc.qml</file>
+        <file>adc_ch_grp.qml</file>
+        <file>CustomTab.qml</file>
+        <file>tab_i2c.qml</file>
+        <file>i2c_control_box.qml</file>
     </qresource>
 </RCC>

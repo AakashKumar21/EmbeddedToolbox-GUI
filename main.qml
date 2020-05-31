@@ -8,8 +8,8 @@ ApplicationWindow {
     id: main
     height: 720
     width: 1024
-
     visible: true
+    Material.accent: Material.Purple
 
     Serial{
         id: serial
@@ -43,29 +43,43 @@ ApplicationWindow {
         // Tab GPIO
         Item {
             id: tabGpio
-            Loader{
-                x: 10
-                y: 10
-                source: "qrc:/tab_gpio.qml"
+             CustomTab{
+                Loader{
+                    x: 10
+                    y: 10
+                    source: "qrc:/tab_gpio.qml"
+                }
             }
         }
         Item {
-            id: tabSetup
-            Loader{
-                x: 10
-                y: 10
-//                source: "qrc:/tab_setup.qml"
+            id: tabAdc
+            CustomTab{
+                Loader{
+                    x: 10
+                    y: 10
+                    source: "qrc:/tab_adc.qml"
+                }
             }
+
         }
         Item {
-            id: name
+            id: tab_gpio
+            CustomTab{
+                Loader{
+                    x: 10
+                    y: 10
+                    source: "qrc:/tab_i2c.qml"
+                }
+            }
         }
         Item {
             id: something
-            Loader{
-                x: 10
-                y: 10
-                source: "qrc:/tab_setup.qml"
+            CustomTab{
+                Loader{
+                    x: 10
+                    y: 10
+                    source: "qrc:/tab_setup.qml"
+                }
             }
         }
     }

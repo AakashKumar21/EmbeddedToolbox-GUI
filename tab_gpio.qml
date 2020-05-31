@@ -6,50 +6,47 @@ import com.Serial 1.0
 import "pin_ctrl_creator.js" as Create
 
 
-GroupBox{
+Item{
 
-    id:lo_control_box
-    height: main.height - 70
-    width: main.width - 20
-    property int y_margin: 10
-//    property string pin_readouts: serial.getReadoutsAll()
-
-
-    ColumnLayout{
-        id: lo_labels
-        Label{
-            id: label_pins
-            text: qsTr("Pin: ")
-        }
-        Rectangle{
-           height: 10
-        }
-        Label{
-            id: label_pinmode
-            text: qsTr("PinMode")
-        }
-        Rectangle{
-           height: 20
-        }
-        Label{
-            id: label_output
-            text: qsTr("Output")
-        }
-        Rectangle{
-           height: 20
-        }
-        Label{
-            text: qsTr("Readout")
-        }
-    }
     GroupBox{
-        id: lo_control
-        width: main.width - lo_control_box.width - 20
-        height: lo_labels.height
-        x: lo_labels.width + 50
-        y: 0
-        Component.onCompleted: Create.createObjects()
+        id: box_gpio_control
+        height: 210
+        width: main.width - 40
+
+        ColumnLayout{
+            id: labels_gpio
+            Label{
+                id: label_pins
+                text: qsTr("Pin: ")
+            }
+            Rectangle{
+               height: 10
+            }
+            Label{
+                id: label_pinmode
+                text: qsTr("PinMode")
+            }
+            Rectangle{
+               height: 20
+            }
+            Label{
+                id: label_output
+                text: qsTr("Output")
+            }
+            Rectangle{
+               height: 20
+            }
+            Label{
+                text: qsTr("Readout")
+            }
+        }
+        Item{
+            id: lo_control
+            x: labels_gpio.width + 50
+            Component.onCompleted: Create.createObjects()
+        }
     }
+
 }
 
 

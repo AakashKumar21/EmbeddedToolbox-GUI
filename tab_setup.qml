@@ -5,10 +5,8 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Styles 1.4
 import com.Serial 1.0
 
-GroupBox{
+Item{
     id:lo_setup
-    height: main.height - 70
-    width: main.width - 20
 
     GroupBox {
         id: lo_connection

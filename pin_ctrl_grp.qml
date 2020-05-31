@@ -8,11 +8,12 @@ ColumnLayout{
 //    property string name: value
 
     Timer {
-        interval: 100; running: true; repeat: true
+        interval: 50; running: true; repeat: true
         onTriggered: {
             label_readout.text = serial.getReadouts(parseInt(parent.objectName))
             label_readout.read_value = parseInt(serial.getReadouts(parseInt(parent.objectName)))
-            label_readout.color = label_readout.read_value ? "red" : "blue"
+            label_readout.color = label_readout.read_value ? Material.color(Material.Red) : Material.color(Material.Blue)
+//            label_readout.text = label_readout.read_value ? "High" : "Low"
         }
     }
 

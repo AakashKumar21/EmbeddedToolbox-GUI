@@ -1,6 +1,5 @@
 #include "serial.h"
 #include <QDebug>
-#include "QmlEngineGlobal.h"
 #include "serialcommands.h"
 
 QList<QSerialPortInfo> Serial::m_serialPortList = QSerialPortInfo::availablePorts();

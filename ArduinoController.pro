@@ -40,7 +40,6 @@ DISTFILES += \
     tab_setup.qml
 
 HEADERS += \
-    QmlEngineGlobal.h \
     serial.h \
     serialcommands.h \
     settings.h \
