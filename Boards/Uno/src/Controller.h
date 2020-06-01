@@ -20,5 +20,4 @@ class Controller
     void set_AnalogRead(MUX pin);
     void set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy);
     void send_digitalRead();
-    bool to_read[14]{0};
 };

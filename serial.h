@@ -35,14 +35,7 @@ public:
     void setPort(int port_index = 0 ); // index of QList<QSerialPortInfo>
     QSerialPort::SerialPortError Begin(enum QSerialPort::BaudRate);
     void End();
-    // Setters
-    bool set_pinMode(PinMode pinmode,Pin pin);
-    bool set_digitalWrite(Pin pin, Output output) ;
-    bool set_analogWrite(Pin pin, int duty) ;
-    bool set_digitalRead(Pin pin) ;
-    bool set_AnalogRead(MUX pin) ;
-    bool set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy) ;
-    bool send_Sync();
+
     QByteArray getData();
 
 Q_INVOKABLE QVector<QString> getReadoutsAll();
@@ -63,6 +56,13 @@ public slots:
     QStringList getComPortList() const;
     void qmlSetOutput(int,bool);
     void qmlSetPinMode(int,bool);
+    bool set_pinMode(int pin, bool pinmode);
+    bool set_digitalWrite(int pin,bool output) ;
+    bool set_analogWrite(int pin, int duty) ;
+    bool set_digitalRead(int pin) ;
+    bool set_AnalogRead(int pin) ;
+    bool set_AnalogConfig(enum AdcPrescale divider,enum  AdcVRef ref,enum  AdcBits accuracy);
+    bool send_Sync();
 
 private slots:
     void handleReadyRead();

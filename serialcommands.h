@@ -8,7 +8,7 @@
 #define OUTPUT 0x1
 #define INPUT_PULLUP 0x2
 
-enum class Cmd{
+enum Cmd{
     PinMode,
     DigitalWrite,
     AnalogWrite,
@@ -19,7 +19,7 @@ enum class Cmd{
     DigitalReadouts
 };
 
-enum class PinMode {
+enum PinMode {
     PinMode_In = INPUT,
     PinMode_Out = OUTPUT,
     PullUp_True = INPUT_PULLUP,
@@ -28,12 +28,12 @@ enum class PinMode {
 //    PullDown_False,
 };
 
-enum class Output{
+enum Output{
     High = HIGH,
     Low = LOW
 };
 
-enum class Pin{
+enum Pin{
     D0,
     D1,
     D2,
@@ -49,7 +49,7 @@ enum class Pin{
     D13
 };
 
-enum class MUX{
+enum MUX{
     A0,
     A1,
     A2,
@@ -60,7 +60,7 @@ enum class MUX{
     A7
 };
 
-enum class AdcPrescale{
+enum AdcPrescale{
     Prescale2,
     Prescale4,
     Prescale8,
@@ -70,12 +70,12 @@ enum class AdcPrescale{
     Prescale128,
 };
 
-enum class AdcBits{
+enum AdcBits{
     Bits10,
     Bits8
 };
 
-enum class AdcVRef{
+enum AdcVRef{
     Aref,
     AVcc,
     Internal1_1V

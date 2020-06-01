@@ -77,9 +77,6 @@ void Serial::qmlSetOutput(int pin, bool output)
 
 void Serial::qmlSetPinMode(int pin, bool pinmode)
 {
-    auto _pin = static_cast<Pin>(pin);
-    auto _pinmode = static_cast<PinMode>(pinmode);
-    set_pinMode(_pinmode, _pin);
 }
 
 
@@ -168,51 +165,51 @@ QStringList Serial::getComPortList() const
 
 }
 
-bool Serial::set_pinMode(PinMode pinMode, Pin pin)
+bool Serial::set_pinMode(int pin, bool pinMode)
 {
     QByteArray data;
-    data.append(static_cast<char>(Cmd::PinMode));
-    data.append(static_cast<char>(pinMode));
-    data.append(static_cast<char>(pin));
+    data.append(Cmd::PinMode);
+    data.append(pinMode);
+    data.append(pin);
 
 
     return this->Write(data);
 }
 
-bool Serial::set_digitalWrite(Pin pin, Output output)
+bool Serial::set_digitalWrite(int pin, bool output)
 {
     QByteArray data;
-    data.append(static_cast<char>(Cmd::DigitalWrite));
-    data.append(static_cast<char>(pin));
-    data.append(static_cast<char>(output));
+    data.append(Cmd::DigitalWrite);
+    data.append(pin);
+    data.append(output);
 
     return this->Write(data);
 }
 
-bool Serial::set_analogWrite(Pin pin, int duty)
+bool Serial::set_analogWrite(int pin,int duty)
 {
     QByteArray data;
-    data.append(static_cast<char>(Cmd::AnalogWrite));
-    data.append(static_cast<char>(pin));
-    data.append(static_cast<char>(duty));
+    data.append(Cmd::AnalogWrite);
+    data.append(pin);
+    data.append(duty);
 
     return this->Write(data);
 }
 
-bool Serial::set_digitalRead(Pin pin)
+bool Serial::set_digitalRead(int pin)
 {
     QByteArray data;
-    data.append(static_cast<char>(Cmd::DigitalRead));
-    data.append(static_cast<char>(pin));
+    data.append(Cmd::DigitalRead);
+    data.append(pin);
 
     return this->Write(data);
 }
 
-bool Serial::set_AnalogRead(MUX pin)
+bool Serial::set_AnalogRead(int pin)
 {
     QByteArray data;
-    data.append(static_cast<char>(Cmd::AnalogRead));
-    data.append(static_cast<char>(pin));
+    data.append(Cmd::AnalogRead);
+    data.append(pin);
 
     return this->Write(data);
 }
@@ -220,10 +217,10 @@ bool Serial::set_AnalogRead(MUX pin)
 bool Serial::set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy)
 {
     QByteArray data;
-    data.append(static_cast<char>(Cmd::AnalogConfig));
-    data.append(static_cast<char>(divider));
-    data.append(static_cast<char>(ref));
-    data.append(static_cast<char>(accuracy));
+    data.append(Cmd::AnalogConfig);
+    data.append(divider);
+    data.append(ref);
+    data.append(accuracy);
 
     return this->Write(data);
 }
@@ -231,7 +228,7 @@ bool Serial::set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy
 bool Serial::send_Sync()
 {
     QByteArray data;
-    data.append(static_cast<char>(Cmd::Sync));
+    data.append(Cmd::Sync);
     data.append('0');
     data.append('0');
     m_qSerialPort->write(data);

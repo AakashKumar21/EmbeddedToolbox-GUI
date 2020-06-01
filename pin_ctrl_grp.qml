@@ -27,7 +27,7 @@ ColumnLayout{
     CheckBox {
             objectName: 'p' + parent.objectName
             onCheckStateChanged: {
-                serial.qmlSetPinMode(parseInt(parent.objectName), checked);
+                serial.set_pinMode(parseInt(parent.objectName),checked);
             }
         }
 
@@ -35,7 +35,7 @@ ColumnLayout{
     CheckBox {
             objectName: 'o' + parent.objectName
             onCheckStateChanged: {
-                serial.qmlSetOutput(parseInt(parent.objectName), checked);
+                serial.set_digitalWrite(parseInt(parent.objectName),checked);
             }
         }
     Text {

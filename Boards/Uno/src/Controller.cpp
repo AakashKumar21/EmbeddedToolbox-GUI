@@ -11,8 +11,6 @@ void Controller::set_pinMode(PinMode pinmode,Pin pin)
 {
     pinMode(static_cast<char>(pin), 
             static_cast<char>(pinmode));
-    to_read[static_cast<char>(pin)] =  
-    pinmode == PinMode::PinMode_In ? 0:1;  
     
     DEBUG("PinMode: ");
     DEBUG(static_cast<int>(pin));
