@@ -39,12 +39,12 @@ int Controller::action(char *bytes)
                         static_cast<Output> (bytes[2]));
         break;  
     case static_cast<char>(Cmd::Sync):
-        loop();
+        send_data();
     }
     return 0;
 }
 
-void Controller::loop()
+void Controller::send_data()
 {
     send_digitalRead();   
 }
@@ -64,6 +64,20 @@ void Controller::send_digitalRead()
 void Controller::run()
 {
     
+
+    if(Serial.available() > 0)
+    {
+        bytes[len++] = Serial.read() ;
+    }
+    if(len == 3)
+    {
+        len = 0;
+        action(bytes);
+    }
+
+
 }
 
-Controller::Controller(){}
+Controller::Controller(size_t i){
+    interval = i;
+}

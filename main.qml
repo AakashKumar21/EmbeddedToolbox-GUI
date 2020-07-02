@@ -1,10 +1,11 @@
+import Felgo 3.0
 import QtQuick 2.7
 import QtQuick.Controls 2.5
 import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
 import com.Serial 1.0
 
-ApplicationWindow {
+App {
     id: main
     height: 720
     width: 1024
