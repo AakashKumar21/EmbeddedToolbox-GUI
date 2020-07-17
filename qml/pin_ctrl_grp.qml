@@ -17,6 +17,7 @@ ColumnLayout{
     Button {
             width: dp(30)
             checkable: true
+            flat: false
             text : "Output"
             checked: true
             objectName: 'p' + parent.objectName

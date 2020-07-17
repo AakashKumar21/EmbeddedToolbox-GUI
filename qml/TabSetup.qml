@@ -36,6 +36,13 @@ Item{
                 text: qsTr("Board:")
             }
             ComboBox {
+                id: dropdownBoards
+                property int board_id
+                property variant board_names: ["Arduino", "STM32_BP"]
+                model: board_names
+                onCurrentIndexChanged: {
+                    board_id = currentIndex;
+                }
             }
             //Port
 
@@ -45,20 +52,15 @@ Item{
             ComboBox {
             }
 
-            // Connect Button
-            MyButton{
+            // Connect Button            
+            Button{
                 text: "Connect"
                 onClicked: {
-                    serial.connected = 1
+                    serial.connected = checked;
                 }
+                checkable: true;
             }
-            MyButton{
-                text: "Disconnect"
-                onClicked: {
-                    serial.connected = 0
-                }
-            }
-            MyButton{
+            Button{
                 text: "Refresh"
                 onClicked: {
                     serial.refresh()

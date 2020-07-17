@@ -169,9 +169,8 @@ bool Serial::set_pinMode(int pin, bool pinMode)
 {
     QByteArray data;
     data.append(Cmd::PinMode);
+    data.append(pin); // TODO Reflect this change
     data.append(pinMode);
-    data.append(pin);
-
 
     return this->Write(data);
 }
