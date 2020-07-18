@@ -6,15 +6,10 @@ import QtQuick.Controls.Material 2.12
 import com.Serial 1.0
 
 App {
-    id:main
-    // You get free licenseKeys from https://felgo.com/licenseKey
-    // With a licenseKey you can:
-    //  * Publish your games & apps for the app stores
-    //  * Remove the Felgo Splash Screen or set a custom one (available with the Pro Licenses)
-    //  * Add plugins to monetize, analyze & improve your apps (available with the Pro Licenses)
-    //licenseKey: "<generate one from https://felgo.com/licenseKey>"
+    id:app
 
-//    dpScale: 0.6
+//    Material.theme: Material.Dark
+//    Material.accent: Material.Purple
 
     Serial{
         id: serial
@@ -40,6 +35,9 @@ App {
             TabButton {
                 text: qsTr("Setup")
             }
+            TabButton {
+                text: qsTr("Testing")
+            }
         }
     StackLayout{
         width: parent.width
@@ -50,8 +48,13 @@ App {
 
         // Tab GPIO
         Item {
+            Rectangle{
+                width: pin_ctrl_grp.width
+                height: pin_ctrl_grp.height
+                color: "red"
+                TabGpio{}
+            }
             id: tabGpio
-            TabGpio{}
         }
         Item {
             id: tabAdc
@@ -65,6 +68,9 @@ App {
         Item {
             id: tab_setup
             TabSetup{}
+        }
+        Item{
+            Testing{}
         }
     }
 }

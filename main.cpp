@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     FelgoApplication felgo;
+//    QQuickStyle::setStyle("Universal");
     QQuickStyle::setStyle("Material");
     qmlRegisterType<Serial>("com.Serial",1,0,"Serial");
 

@@ -24,6 +24,8 @@ Item{
     ListView{
         id: lo_i2c_ctrl_box
         y: box_i2c_panel.height + 10
-//        Component.onCompleted: Create.createI2C(5)
+        onClipChanged: {
+//            box_i2c_panel.
+        }
     }
 }

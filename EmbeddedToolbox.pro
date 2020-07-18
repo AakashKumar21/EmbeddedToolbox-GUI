@@ -64,4 +64,5 @@ macx {
 DISTFILES += \
     qml/Custom/MyButton.qml \
     qml/MyCheckBox.qml \
-    qml/MyLabel.qml
+    qml/TestElement.qml \
+    qml/Testing.qml

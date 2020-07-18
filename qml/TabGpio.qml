@@ -8,10 +8,11 @@ import com.Serial 1.0
 Item{
     GroupBox{
         id: box_gpio_control
-        x: 10
-        y: 10
+        x: dp(4)
+        y: dp(4)
         height: dp(180)
         width: main.width - 20
+        clip: true
         title: "GPIO Config"
 
         ColumnLayout{
@@ -39,17 +40,15 @@ Item{
                 text: qsTr("Readout")
             }
         }
-        Item{
-            id: lo_gpio_control
-            x: labels_gpio.width + 50
-            Component.onCompleted:{
-                        var component = Qt.createComponent("pin_ctrl_grp.qml");
-                        for (var i=0; i<14; i++) {
-                                    var object = component.createObject(lo_gpio_control);
-                                    object.x = (object.width + main.dp(20)) * i;
-                                    object.objectName = i
-                                }
-                    }
+        RowLayout{
+            height: parent.height
+            spacing: dp(4)
+            x: labels_gpio.width + dp(10)
+            y: dp(1)
+            Repeater{
+                model: 14
+                PinGpioCtr{pin_no: index}
+            }
         }
     }
 
