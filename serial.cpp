@@ -68,21 +68,14 @@ Serial::Serial(QObject *parent) :
     m_gpioData.resize(14);
 }
 
-void Serial::qmlSetOutput(int pin, bool output)
-{
-    auto _pin = static_cast<Pin>(pin);
-    auto _output = static_cast<Output>(output);
-    set_digitalWrite(_pin, _output);
-}
-
-void Serial::qmlSetPinMode(int pin, bool pinmode)
-{
-}
-
-
 QVector<QString> Serial::getReadoutsAll()
 {
     return m_gpioData;
+}
+
+QByteArray Serial::getI2cAd()
+{
+    return m_i2c_ad;
 }
 
 
@@ -168,7 +161,7 @@ QStringList Serial::getComPortList() const
 bool Serial::set_pinMode(int pin, bool pinMode)
 {
     QByteArray data;
-    data.append(Cmd::PinMode);
+    data.append(CMD_PinMode);
     data.append(pin); // TODO Reflect this change
     data.append(pinMode);
 
@@ -178,7 +171,7 @@ bool Serial::set_pinMode(int pin, bool pinMode)
 bool Serial::set_digitalWrite(int pin, bool output)
 {
     QByteArray data;
-    data.append(Cmd::DigitalWrite);
+    data.append(CMD_DigitalWrite);
     data.append(pin);
     data.append(output);
 
@@ -188,7 +181,7 @@ bool Serial::set_digitalWrite(int pin, bool output)
 bool Serial::set_analogWrite(int pin,int duty)
 {
     QByteArray data;
-    data.append(Cmd::AnalogWrite);
+    data.append(CMD_AnalogWrite);
     data.append(pin);
     data.append(duty);
 
@@ -198,7 +191,7 @@ bool Serial::set_analogWrite(int pin,int duty)
 bool Serial::set_digitalRead(int pin)
 {
     QByteArray data;
-    data.append(Cmd::DigitalRead);
+    data.append(CMD_DigitalRead);
     data.append(pin);
 
     return this->Write(data);
@@ -207,27 +200,27 @@ bool Serial::set_digitalRead(int pin)
 bool Serial::set_AnalogRead(int pin)
 {
     QByteArray data;
-    data.append(Cmd::AnalogRead);
+    data.append(CMD_AnalogRead);
     data.append(pin);
 
     return this->Write(data);
 }
 
-bool Serial::set_AnalogConfig(AdcPrescale divider, AdcVRef ref, AdcBits accuracy)
+bool Serial::i2c_scan()
 {
     QByteArray data;
-    data.append(Cmd::AnalogConfig);
-    data.append(divider);
-    data.append(ref);
-    data.append(accuracy);
+    data.append(CMD_I2C);
+    data.append(I2C_Scan);
+    data.append(static_cast<int>(0));
 
-    return this->Write(data);
+    m_i2c_ad.clear();
+    m_qSerialPort->write(data);
 }
 
 bool Serial::send_Sync()
 {
     QByteArray data;
-    data.append(Cmd::Sync);
+    data.append(CMD_Sync);
     data.append('0');
     data.append('0');
     m_qSerialPort->write(data);
@@ -260,13 +253,13 @@ void Serial::handleReadyRead()
 {
     m_readData.clear();
     m_readData = m_qSerialPort->readAll();
-    int cmd = m_readData[0];
-    int portB = m_readData[1];
-    int portD = m_readData[2];
+    int byte1 = m_readData[0];
+    int byte2 = m_readData[1];
+    int byte3 = m_readData[2];
 
     emit onNotifyDatRecv();
 
-    if(cmd == static_cast<int>(Cmd::DigitalReadouts))
+    if(byte1 == CMD_DigitalReadouts)
     {
 
         for(int i=0; i<8; i++)
@@ -274,7 +267,7 @@ void Serial::handleReadyRead()
 
 
             // PORTB
-            if(portB & (1<<i))
+            if(byte2 & (1<<i))
             {
                 if(i+8 < 14){
                     m_gpioData[i+8] = "1";
@@ -288,7 +281,7 @@ void Serial::handleReadyRead()
             }
 
             // PORTD
-            if(portD & (1<<i))
+            if(byte3 & (1<<i))
             {
               m_gpioData[i] = "1"; // BUG PRONE
             }
@@ -297,6 +290,12 @@ void Serial::handleReadyRead()
                 m_gpioData[i] = "0";
             }
         }
+    }
+
+    if(byte1 == I2C_Scan)
+    {
+        m_i2c_ad.append(byte1);
+        m_i2c_ad.append(byte2);
     }
 
     if (!m_timer.isActive())

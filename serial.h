@@ -39,6 +39,7 @@ public:
     QByteArray getData();
 
 Q_INVOKABLE QVector<QString> getReadoutsAll();
+Q_INVOKABLE QByteArray getI2cAd();
 
 signals:
     void NotifyData();
@@ -54,14 +55,12 @@ public slots:
     void refresh();
     //Returns List of COM ports to be added to drop down menu
     QStringList getComPortList() const;
-    void qmlSetOutput(int,bool);
-    void qmlSetPinMode(int,bool);
     bool set_pinMode(int pin, bool pinmode);
     bool set_digitalWrite(int pin,bool output) ;
     bool set_analogWrite(int pin, int duty) ;
     bool set_digitalRead(int pin) ;
     bool set_AnalogRead(int pin) ;
-    bool set_AnalogConfig(enum AdcPrescale divider,enum  AdcVRef ref,enum  AdcBits accuracy);
+    bool i2c_scan();
     bool send_Sync();
 
 private slots:
@@ -91,6 +90,7 @@ private:
     QVector<QString> m_gpioData;
 
     QByteArray m_readData;
+    QByteArray m_i2c_ad;
     QTimer m_timer;
     QStringList m_portNameList;
 

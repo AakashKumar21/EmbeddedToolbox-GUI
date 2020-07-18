@@ -1,6 +1,6 @@
 #include <QApplication>
 #include <FelgoApplication>
-//#include <FelgoLiveClient>
+#include <FelgoLiveClient>
 #include <QQuickStyle>
 #include <QQmlApplicationEngine>
 #include "serial.h"
@@ -34,10 +34,10 @@ int main(int argc, char *argv[])
     // to avoid deployment of your qml files and images, also comment the DEPLOYMENTFOLDERS command in the .pro file
     // also see the .pro file for more details
 
-    felgo.setMainQmlFileName(QStringLiteral("qrc:/qml/Main.qml"));
-    engine.load(QUrl(felgo.mainQmlFileName()));
+//    felgo.setMainQmlFileName(QStringLiteral("qrc:/qml/Main.qml"));
+//    engine.load(QUrl(felgo.mainQmlFileName()));
 
-//    FelgoLiveClient client (&engine);
+    FelgoLiveClient client (&engine);
 
     return app.exec();
 }

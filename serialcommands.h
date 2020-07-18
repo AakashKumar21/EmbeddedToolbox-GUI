@@ -1,88 +1,37 @@
 #ifndef SERIALCOMMANDS_H
 #define SERIALCOMMANDS_H
 
-#define HIGH 0x1
-#define LOW  0x0
-
-#define INPUT 0x0
-#define OUTPUT 0x1
-#define INPUT_PULLUP 0x2
-
 enum Cmd{
-    PinMode,
-    DigitalWrite,
-    AnalogWrite,
-    DigitalRead,
-    AnalogRead,
-    AnalogConfig,
-    Sync,
-    DigitalReadouts
+    CMD_PinMode,
+    CMD_DigitalWrite,
+    CMD_AnalogWrite,
+    CMD_DigitalRead,
+    CMD_AnalogRead,
+    CMD_AnalogConfig,
+    CMD_Sync,
+    CMD_DigitalReadouts,
+    CMD_I2C
 };
 
 enum PinMode {
-    PinMode_In = INPUT,
-    PinMode_Out = OUTPUT,
-    PullUp_True = INPUT_PULLUP,
+    PinMode_Input,
+    PinMode_Output,
+    PinMode_InPullUp
 //    PullUp_False,
 //    PullDown_True,
 //    PullDown_False,
 };
 
 enum Output{
-    High = HIGH,
-    Low = LOW
+        Output_Low,
+        Output_High
 };
 
-enum Pin{
-    D0,
-    D1,
-    D2,
-    D3,
-    D4,
-    D6,
-    D7,
-    D8,
-    D9,
-    D10,
-    D11,
-    D12,
-    D13
-};
-
-enum MUX{
-    A0,
-    A1,
-    A2,
-    A3,
-    A4,
-    A5,
-    A6,
-    A7
-};
-
-enum AdcPrescale{
-    Prescale2,
-    Prescale4,
-    Prescale8,
-    Prescale16,
-    Prescale32,
-    Prescale64,
-    Prescale128,
-};
-
-enum AdcBits{
-    Bits10,
-    Bits8
-};
-
-enum AdcVRef{
-    Aref,
-    AVcc,
-    Internal1_1V
-};
-
-class Pwm{
-
+enum I2C{
+    I2C_Scan,
+    I2C_Write,
+    I2C_Read,
+    I2C_MemWrite
 };
 
 #endif // SERIALCOMMANDS_H
