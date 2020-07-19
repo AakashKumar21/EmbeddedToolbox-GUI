@@ -1,4 +1,3 @@
-import Felgo 3.0
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
@@ -11,16 +10,16 @@ GroupBox{
         Rectangle{
             width: 20
         }
-        AppButton{
+        Button{
             text: qsTr("Connect")
         }
-        AppButton{
+        Button{
             text: qsTr("Disconnect")
         }
         Rectangle{
             width: 20
         }
-        AppTextInput{
+        TextInput{
             text: qsTr("Enter a byte in Hex")
             onAccepted: text = ""
             onFocusChanged: {

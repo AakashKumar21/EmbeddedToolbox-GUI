@@ -1,4 +1,3 @@
-import Felgo 3.0
 import QtQuick 2.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls 2.12
@@ -12,10 +11,10 @@ Item{
     RowLayout{
         id: box_i2c_panel
 
-        MyButton{
+        Button{
             text: "Scan"
         }
-        MyLabel{
+        Label{
             text: "i2c Devices Found: "
         }
 

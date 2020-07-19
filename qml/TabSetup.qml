@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
 import com.Serial 1.0
-import Felgo 3.0
 
 Item{
     id:lo_setup

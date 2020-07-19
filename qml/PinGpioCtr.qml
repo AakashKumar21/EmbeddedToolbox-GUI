@@ -3,7 +3,7 @@ import QtQuick.Controls.Material 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Styles 1.4
-import Felgo 3.0
+import QtQuick.Window 2.12
 
 ColumnLayout{
     id: pin_ctrl_grp
@@ -46,14 +46,12 @@ ColumnLayout{
     }
 
     //PWM
-    AppTextInput {
+    TextInput {
         objectName: 'p' + parent.objectName
         text: "1022"
-        width: dp(20)
-        placeholderText: "PWM"
     }
     // Digital Read
-    MyLabel {
+    Label {
         id: label_readout
         property bool read_value
         leftPadding: 15

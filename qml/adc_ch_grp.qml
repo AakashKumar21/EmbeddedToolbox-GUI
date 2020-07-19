@@ -1,4 +1,3 @@
-import Felgo 3.0
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
@@ -13,7 +12,7 @@ ColumnLayout{
 //            serial.set_pinMode(parseInt(parent.objectName),checked);
         }
     }
-    AppText{
+    Text{
         text: "0"
     }
 }

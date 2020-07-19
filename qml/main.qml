@@ -1,15 +1,24 @@
-import Felgo 3.0
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls.Material 2.12
+import QtQuick.Window 2.12
 import com.Serial 1.0
 
-App {
+ApplicationWindow {
     id:app
+    property int dpi
+    Component.onCompleted: {
+        dpi = Screen.pixelDensity
+        console.log(height)
+        console.log(width)
+    }
 
-//    Material.theme: Material.Dark
-//    Material.accent: Material.Purple
+    height: dpi * 100
+    width: dpi * 150
+
+    Material.theme: Material.Light
+    Material.accent: Material.Purple
 
     Serial{
         id: serial
