@@ -14,17 +14,12 @@ class Serial : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QStringList portList READ getComPortList NOTIFY onClickRefresh)
-//    Q_PROPERTY(bool clicked WRITE onClick)
     Q_PROPERTY(bool comPort WRITE setPort)
 
     Q_PROPERTY(bool connected READ isConnected WRITE Connect)
     Q_PROPERTY(int port WRITE setPort)
     Q_PROPERTY(NOTIFY onNotifyDatRecv)
 
-//    Q_PROPERTY(bool pinMode WRITE qmlSetPinMode)
-//    Q_PROPERTY(bool pinMode WRITE qmlSetOutput)
-//    Q_PROPERTY(int pin_readout READ getReadouts WRITE setReadPin NOTIFY onGpioDataRecv)
-//    Q_PROPERTY(QString readouts READ getReadouts WRITE readoutPin NOTIFY onGpioDataRecv)
 
 public:
 

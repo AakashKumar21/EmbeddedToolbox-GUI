@@ -71,6 +71,7 @@ Item{
     }
 
     // APPEARANCE
+
     GroupBox{
         id: lo_appear
         x: 10
@@ -78,7 +79,7 @@ Item{
         height: 100
         anchors.top : lo_connection.bottom
         anchors.topMargin: dpi*4
-        title: "Connection Config"
+        title: "Appearance Config"
 
         RowLayout{
             // Style
@@ -87,6 +88,9 @@ Item{
             }
             ComboBox{
                 model: ["Default", "Material"]
+                onCurrentIndexChanged: {
+                    utils.setStyle(currentIndex)
+                }
             }
 
             // Accent
@@ -94,7 +98,11 @@ Item{
                 text: "Accent"
             }
             ComboBox{
-                model: ["Red","Orange","Green","Blue"]
+                model: ["Red","Orange","Green","Blue","Purple"]
+                property variant accents: [Material.Red, Material.Orange,Material.Green,Material.Purple]
+                onCurrentIndexChanged: {
+                    app.Material.accent = accents[currentIndex]
+                }
             }
 
             // Theme
@@ -103,6 +111,9 @@ Item{
             }
             ComboBox{
                 model: ["Light", "Dark"]
+                onCurrentIndexChanged:{
+                    app.Material.Theme = Material.Light
+                }
             }
 
         }
