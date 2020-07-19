@@ -17,48 +17,11 @@ Rectangle{
         anchors{
             horizontalCenter: parent.horizontalCenter
         }
-        //Pins
-        Label {
-            text: "D04"
-        }
-        // PinMode
-        Button {
-                width: dpi*10
-                checkable: true
-                flat: false
-                text : "Output"
-                checked: true
-                objectName: 'p'
-                onCheckedChanged: {
-                    serial.set_pinMode(parseInt(parent.objectName),checked);
-                    if(checked) text = "Output";
-                    else text = "Input";
-                }
-            }
 
-        //Output
-        Button {
-                objectName: 'o' + parent.objectName
-                text: "Low"
-                checkable: true
-                onCheckedChanged: {
-                    serial.set_digitalWrite(parseInt(parent.objectName),checked);
-                    if(checked) text = "High";
-                    else text = "Low";
-                }
-            }
-        //PWM
-        TextInput {
-            objectName: 'p' + parent.objectName
-            text: "1022"
-    //        contentWidth: dp(10)
-            width: dpi*5
-        }
-        Label {
-            id: label_readout
-            property bool read_value
-            leftPadding: 15
-            text: "1"
-        }
+        Label {text: "GG"}
+        Button {}
+        Button {}
+        TextInput{}
+        Label {}
     }
 }

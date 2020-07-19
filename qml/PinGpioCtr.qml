@@ -16,11 +16,10 @@ ColumnLayout{
 
     //Pins
     Rectangle{
-        height: dpi*8
-        width: dpi*16
+        height: dpi*6
+        width: dpi*14
         Text {
             text: "D" + pin_no
-            leftPadding: dpi*4
             font.bold: true
             font.pixelSize: dpi*4
         }
@@ -31,6 +30,7 @@ ColumnLayout{
     Button {
         checkable: true
         flat: false
+        width: dpi*15
         text : "Output"
         checked: true
         objectName: 'p' + pin_no
@@ -46,28 +46,31 @@ ColumnLayout{
         objectName: 'o' + pin_no
         text: "Low"
         checkable: true
-//        width: dpi*14
+        flat: false
+        width: dpi*14
         onCheckedChanged: {
             serial.set_digitalWrite(parseInt(parent.objectName),checked);
             if(checked) text = "High";
             else text = "Low";
         }
     }
-//    Rectangle{ height: dpi * 0.2}
 
     //PWM
     TextField {
         objectName: 'p' + parent.objectName
-        text: "1022"
+        text: "0"
         font.pixelSize: dpi*4
-//        width: dpi*14
+        width: dpi*14
     }
+
     // Digital Read
     Label {
         id: label_readout
         property bool read_value
         leftPadding: 15
-        text: serial.readouts_arr[parseInt(parent.objectName)]
+//        text: serial.readouts_arr[parseInt(parent.objectName)]
+        text: "1"
+        font.pixelSize: dpi*4
     }
 }
 
