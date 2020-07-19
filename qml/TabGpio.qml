@@ -41,15 +41,21 @@ Item{
                 text: qsTr("Readout")
             }
         }
-        RowLayout{
+        ScrollView{
             height: parent.height
             spacing: dpi * 4
             x: labels_gpio.width + dpi * 10
             y: dpi * 1
-            Repeater{
-                model: 14
-                PinGpioCtr{pin_no: index}
+
+            RowLayout{
+                Repeater{
+                    model: 14
+                    PinGpioCtr{pin_no: index}
+                }
             }
+
+//            ScrollView{
+//            }
         }
     }
 

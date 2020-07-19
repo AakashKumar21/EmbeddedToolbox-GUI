@@ -10,15 +10,22 @@ ColumnLayout{
     property int pin_no: 0
     height: parent.height
     Layout.fillHeight: true    
-//    clip: true
-    Layout.alignment: Qt.AlignTop
-//    spacing: dpi*4
+    clip: true
+    Layout.alignment: Qt.AlignHCenter
+    Layout.preferredWidth: dpi*16
 
     //Pins
-    Label {
-        text: "D" + pin_no
+    Rectangle{
+        height: dpi*8
+        width: dpi*16
+        Text {
+            text: "D" + pin_no
+            leftPadding: dpi*4
+            font.bold: true
+            font.pixelSize: dpi*4
+        }
+        clip: true
     }
-    Rectangle{ height: dpi }
 
     // PinMode
     Button {
@@ -39,7 +46,7 @@ ColumnLayout{
         objectName: 'o' + pin_no
         text: "Low"
         checkable: true
-        width: dpi*14
+//        width: dpi*14
         onCheckedChanged: {
             serial.set_digitalWrite(parseInt(parent.objectName),checked);
             if(checked) text = "High";
@@ -49,10 +56,11 @@ ColumnLayout{
 //    Rectangle{ height: dpi * 0.2}
 
     //PWM
-    TextInput {
+    TextField {
         objectName: 'p' + parent.objectName
         text: "1022"
         font.pixelSize: dpi*4
+//        width: dpi*14
     }
     // Digital Read
     Label {

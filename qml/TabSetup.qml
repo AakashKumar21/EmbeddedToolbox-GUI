@@ -7,12 +7,14 @@ import com.Serial 1.0
 Item{
     id:lo_setup
 
+    // CONNNECTION CONFIG
     GroupBox {
         id: lo_connection
         x: 10
         y: 10
         width: app.width - 20
         height: 100
+        title: "Connection Config"
 
         RowLayout{
             //Port
@@ -66,7 +68,45 @@ Item{
                 }
             }
         }
-    }   
+    }
+
+    // APPEARANCE
+    GroupBox{
+        id: lo_appear
+        x: 10
+        width: app.width - 20
+        height: 100
+        anchors.top : lo_connection.bottom
+        anchors.topMargin: dpi*4
+        title: "Connection Config"
+
+        RowLayout{
+            // Style
+            Text {
+                text: "Style"
+            }
+            ComboBox{
+                model: ["Default", "Material"]
+            }
+
+            // Accent
+            Text {
+                text: "Accent"
+            }
+            ComboBox{
+                model: ["Red","Orange","Green","Blue"]
+            }
+
+            // Theme
+            Text {
+                text: "Theme"
+            }
+            ComboBox{
+                model: ["Light", "Dark"]
+            }
+
+        }
+    }
 }
 
 

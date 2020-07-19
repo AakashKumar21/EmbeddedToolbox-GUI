@@ -15,7 +15,9 @@ int main(int argc, char *argv[])
 
     FelgoApplication felgo;
 //    QQuickStyle::setStyle("Universal");
-    QQuickStyle::setStyle("Material");
+//    QQuickStyle::setStyle("Material");
+//    QQuickStyle::setStyle("Fusion");
+
     qmlRegisterType<Serial>("com.Serial",1,0,"Serial");
 
     // Use platform-specific fonts instead of Felgo's default font

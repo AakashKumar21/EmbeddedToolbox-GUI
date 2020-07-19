@@ -1,7 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Controls.Material 2.12
+//import QtQuick.Controls.Material 2.12
 import QtQuick.Window 2.12
 import com.Serial 1.0
 
@@ -21,8 +21,11 @@ ApplicationWindow  {
     height: Screen.height
     width: Screen.width
 
-    Material.theme: Material.Light
-    Material.accent: Material.Purple
+//    Material.theme: Material.Light
+//    Material.accent: Material.Purple
+
+//    Universal.theme: Universal.Dark
+//    Universal.accent: Universal.Violet
 
     Serial{
         id: serial
