@@ -11,9 +11,9 @@ Item {
         title: "Testing"
         x: 10
         y: 10
-        height: dp(300)
-        width: dp(200)
-        MyButton{
+        height: dpi * 30
+        width: dpi * 50
+        Button{
             text: "Testing"
             onClicked: {
                 var component = Qt.createComponent("test_element.qml");

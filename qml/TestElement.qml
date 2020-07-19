@@ -18,7 +18,7 @@ Rectangle{
             horizontalCenter: parent.horizontalCenter
         }
         //Pins
-        MyLabel {
+        Label {
             text: "D04"
         }
         // PinMode
@@ -48,14 +48,13 @@ Rectangle{
                 }
             }
         //PWM
-        AppTextInput {
+        TextInput {
             objectName: 'p' + parent.objectName
             text: "1022"
     //        contentWidth: dp(10)
             width: dp(20)
-            placeholderText: "PWM"
         }
-        MyLabel {
+        Label {
             id: label_readout
             property bool read_value
             leftPadding: 15

@@ -14,7 +14,7 @@ ColumnLayout{
     clip: true
 
     //Pins
-    MyLabel {
+    Label {
         text: "D" + pin_no
     }
 
