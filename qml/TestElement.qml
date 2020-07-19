@@ -8,11 +8,11 @@ import Felgo 3.0
 Rectangle{
     color: "steelblue"
     width: 80
-    height: dp(180)
+    height: dpi * 40
     ColumnLayout{
         id: pin_ctrl_grp
         Layout.fillHeight: true
-        spacing: dp(15)
+        spacing: dpi*5
         Layout.alignment : Qt.AlignHCenter
         anchors{
             horizontalCenter: parent.horizontalCenter
@@ -23,7 +23,7 @@ Rectangle{
         }
         // PinMode
         Button {
-                width: dp(30)
+                width: dpi*10
                 checkable: true
                 flat: false
                 text : "Output"
@@ -52,7 +52,7 @@ Rectangle{
             objectName: 'p' + parent.objectName
             text: "1022"
     //        contentWidth: dp(10)
-            width: dp(20)
+            width: dpi*5
         }
         Label {
             id: label_readout

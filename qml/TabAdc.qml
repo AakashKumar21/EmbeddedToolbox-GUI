@@ -34,7 +34,7 @@ Item{
                 var component = Qt.createComponent("adc_ch_grp.qml");
                 for (var i=0; i<7; i++) {
                     var object = component.createObject(lo_adc_control);
-                    object.x = (object.width + app.dp(20)) * i;
+                    object.x = (object.width + dpi*5) * i;
                     object.objectName = i
                     }
                 }

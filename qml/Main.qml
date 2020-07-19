@@ -5,17 +5,21 @@ import QtQuick.Controls.Material 2.12
 import QtQuick.Window 2.12
 import com.Serial 1.0
 
-ApplicationWindow {
+ApplicationWindow  {
     id:app
     property int dpi
+//    visibility: Window.FullScreen
+    font.pixelSize: dpi*3
+
     Component.onCompleted: {
-        dpi = Screen.pixelDensity
-        console.log(height)
-        console.log(width)
+        dpi = Screen.pixelDensity;
+        console.log(height);
+        console.log(width);
+        showMaximized();
     }
 
-    height: dpi * 100
-    width: dpi * 150
+    height: Screen.height
+    width: Screen.width
 
     Material.theme: Material.Light
     Material.accent: Material.Purple
@@ -58,8 +62,6 @@ ApplicationWindow {
         // Tab GPIO
         Item {
             Rectangle{
-                width: pin_ctrl_grp.width
-                height: pin_ctrl_grp.height
                 color: "red"
                 TabGpio{}
             }

@@ -11,7 +11,7 @@ Item{
         id: lo_connection
         x: 10
         y: 10
-        width: main.width - 20
+        width: app.width - 20
         height: 100
 
         RowLayout{
