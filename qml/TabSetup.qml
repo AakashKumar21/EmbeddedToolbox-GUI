@@ -89,7 +89,6 @@ Item{
             ComboBox{
                 model: ["Default", "Material"]
                 onCurrentIndexChanged: {
-                    utils.setStyle(currentIndex)
                 }
             }
 

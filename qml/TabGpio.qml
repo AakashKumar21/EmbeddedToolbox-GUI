@@ -8,14 +8,13 @@ import com.Serial 1.0
 Item{
     GroupBox{
         id: box_gpio_control   
-        Component.onCompleted: {
-            x= dpi * 4
-            y= dpi*4
-            height= dpi * 54
-            width= app.width - dpi * 20
-            clip= true
-            title: "GPIO Config"
-        }
+        x: dpi * 4
+        y: dpi*4
+        height: dpi * 54
+        width: app.width - dpi * 8
+        clip: true
+        title: "GPIO Config"
+
 
         ColumnLayout{
             id: labels_gpio

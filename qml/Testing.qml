@@ -23,7 +23,8 @@ Item {
             RowLayout{
                 Repeater{
                     model: 5
-                    TestElement{}
+                    delegate:
+                        TestElement{txt : index}
                 }
             }
         }

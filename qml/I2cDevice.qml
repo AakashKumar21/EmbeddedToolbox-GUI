@@ -2,29 +2,26 @@ import QtQuick 2.12
 import QtQuick.Controls.Material 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Controls.Styles 1.4
-import Felgo 3.0
 
-Rectangle{
-    property variant txt
-    color: "steelblue"
-    width: 80
+Item{
+    id: i2c_device_delegate
+    property variant address
+    width: 400
     height: dpi * 40
-    ColumnLayout{
-        id: pin_ctrl_grp
+    RowLayout{
         Layout.fillHeight: true
         spacing: dpi*5
         Layout.alignment : Qt.AlignHCenter
         anchors{
             horizontalCenter: parent.horizontalCenter
         }
+        clip: true
 
-        Label {text: "GG"}
-        Button {}
-        Button {}
+        Label {text: "Address: "+address}
         TextField{
-            placeholderText: "HELLLO" + txt
+            placeholderText: "Send Bytes"
         }
+        Button {}
         Label {}
     }
 }

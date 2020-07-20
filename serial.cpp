@@ -232,11 +232,6 @@ QByteArray Serial::getData()
     return m_readData;
 }
 
-void Serial::test(QString x)
-{
-    qDebug() << "Test is working" << x;
-}
-
 void Serial::refresh()
 {
     m_findComPort();
@@ -257,15 +252,11 @@ void Serial::handleReadyRead()
     int byte2 = m_readData[1];
     int byte3 = m_readData[2];
 
-    emit onNotifyDatRecv();
-
     if(byte1 == CMD_DigitalReadouts)
     {
 
         for(int i=0; i<8; i++)
         {
-
-
             // PORTB
             if(byte2 & (1<<i))
             {
@@ -290,17 +281,20 @@ void Serial::handleReadyRead()
                 m_gpioData[i] = "0";
             }
         }
+        emit onNotifyDatRecv();
     }
 
-    if(byte1 == I2C_Scan)
+    if(byte1 == CMD_Scan)
     {
-        m_i2c_ad.append(byte1);
+        if(byte3 == I2C_ScanEnd)
+        {
+            emit i2cDevicesRecv();
+        }
         m_i2c_ad.append(byte2);
+        m_i2c_ad.append(byte3);
     }
 
     if (!m_timer.isActive())
         m_timer.start(4);
-//    qDebug() << "Gpio Data Recv";
-//    qDebug() <<  m_gpioData;
 }
 

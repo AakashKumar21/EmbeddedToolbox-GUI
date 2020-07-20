@@ -7,12 +7,16 @@ import QtQuick.Window 2.12
 
 ColumnLayout{
     id: pin_ctrl_grp
-    property int pin_no: 0
+    property int pin_no
     height: parent.height
     Layout.fillHeight: true    
     clip: true
     Layout.alignment: Qt.AlignHCenter
     Layout.preferredWidth: dpi*16
+
+    Component.onCompleted: {
+        console.log("Pin:", pin_no)
+    }
 
     //Pins
     Rectangle{
@@ -35,7 +39,7 @@ ColumnLayout{
         checked: true
         objectName: 'p' + pin_no
         onCheckedChanged: {
-            serial.set_pinMode(parseInt(parent.objectName),checked);
+            serial.set_pinMode(pin_no,checked);
             if(checked) text = "Output";
             else text = "Input";
         }
@@ -49,7 +53,7 @@ ColumnLayout{
         flat: false
         width: dpi*14
         onCheckedChanged: {
-            serial.set_digitalWrite(parseInt(parent.objectName),checked);
+            serial.set_digitalWrite(pin_no,checked);
             if(checked) text = "High";
             else text = "Low";
         }
@@ -57,7 +61,7 @@ ColumnLayout{
 
     //PWM
     TextField {
-        objectName: 'p' + parent.objectName
+        objectName: 'p' + pin_no
         text: "0"
         font.pixelSize: dpi*4
         width: dpi*14
@@ -66,10 +70,11 @@ ColumnLayout{
     // Digital Read
     Label {
         id: label_readout
-        property bool read_value
         leftPadding: 15
-//        text: serial.readouts_arr[parseInt(parent.objectName)]
-        text: "1"
+        text: app.readouts_arr[pin_no]
+        onTextChanged: {
+            console.log(text);
+        }
         font.pixelSize: dpi*4
     }
 }

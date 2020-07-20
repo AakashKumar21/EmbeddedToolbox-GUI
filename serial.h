@@ -19,6 +19,7 @@ class Serial : public QObject
     Q_PROPERTY(bool connected READ isConnected WRITE Connect)
     Q_PROPERTY(int port WRITE setPort)
     Q_PROPERTY(NOTIFY onNotifyDatRecv)
+    Q_PROPERTY(NOTIFY i2cDevicesRecv)
 
 
 public:
@@ -43,32 +44,30 @@ signals:
     void onClickRefresh();
     void onGpioDataRecv();
     void onNotifyDatRecv();
+    void i2cDevicesRecv();
 
 public slots:
-    void test(QString x);
     // Refresh ComPortList
     void refresh();
+
     //Returns List of COM ports to be added to drop down menu
     QStringList getComPortList() const;
+
+    //GPIO Control methods
     bool set_pinMode(int pin, bool pinmode);
     bool set_digitalWrite(int pin,bool output) ;
     bool set_analogWrite(int pin, int duty) ;
     bool set_digitalRead(int pin) ;
     bool set_AnalogRead(int pin) ;
+
+    //I2C Methods
     bool i2c_scan();
     bool send_Sync();
 
 private slots:
     void handleReadyRead();
-//    void handleTimeout();
-//    void handleError(QSerialPort::SerialPortError error);
 
 private:
-//    static Serial* _instance;
-
-//    Serial(const Serial&);
-//    Serial& operator=(const Serial&);
-
     QStringList portList() const;
     void refreshPortList(bool arg) const;
     void onClick(bool arg) const;
@@ -88,8 +87,6 @@ private:
     QByteArray m_i2c_ad;
     QTimer m_timer;
     QStringList m_portNameList;
-
-
 };
 
 #endif // SERIAL_H

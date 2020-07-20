@@ -10,7 +10,8 @@ enum Cmd{
     CMD_AnalogConfig,
     CMD_Sync,
     CMD_DigitalReadouts,
-    CMD_I2C
+    CMD_I2C,
+	CMD_Scan
 };
 
 enum PinMode {
@@ -31,7 +32,8 @@ enum I2C{
     I2C_Scan,
     I2C_Write,
     I2C_Read,
-    I2C_MemWrite
+    I2C_MemWrite,
+	I2C_ScanEnd
 };
 
 #endif // SERIALCOMMANDS_H

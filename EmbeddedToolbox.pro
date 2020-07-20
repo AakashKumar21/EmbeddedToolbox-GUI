@@ -62,5 +62,6 @@ HEADERS += serial.h serialcommands.h
 #}
 
 DISTFILES += \
+    qml/I2cDevice.qml \
     qml/TestElement.qml \
     qml/Testing.qml
