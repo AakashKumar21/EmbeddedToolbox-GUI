@@ -73,7 +73,7 @@ QVector<QString> Serial::getReadoutsAll()
     return m_gpioData;
 }
 
-QByteArray Serial::getI2cAd()
+QVector<int> Serial::getI2cAd()
 {
     return m_i2c_ad;
 }

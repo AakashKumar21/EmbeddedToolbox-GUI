@@ -9,7 +9,7 @@ ApplicationWindow  {
     id:app
     property int dpi
     property var readouts_arr
-    property var i2c_ad_list
+    property var i2c_ad_list: []
 //    visibility: Window.FullScreen
     font.pixelSize: dpi*3
 
@@ -18,7 +18,7 @@ ApplicationWindow  {
         console.log(height);
         console.log(width);
         showMaximized();
-        readouts_arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        readouts_arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     }
 
     height: Screen.height
@@ -28,12 +28,12 @@ ApplicationWindow  {
         id: serial
         onOnNotifyDatRecv: {
             readouts_arr = serial.getReadoutsAll();
-//            console.log("Got Readings");
-//            console.log(readouts_arr);
+            console.log("Got Readings");
 
         }
         onI2cDevicesRecv: {
             i2c_ad_list = serial.getI2cAd();
+            var tmp = serial.getI2cAd()
             console.log("Got I2c Devices");
         }
     }

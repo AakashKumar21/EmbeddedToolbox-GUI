@@ -18,13 +18,11 @@ Item{
             Button{
                 text: "Scan"
                 onClicked: {
-                    var tmp_list = device_list;
-                    tmp_list.pop();
-                    device_list = tmp_list;
+                    serial.i2c_scan();
                 }
             }
             Label{
-                text: "Found: "
+                text: "Found: " + i2c_ad_list.length
             }
 
         }
@@ -68,8 +66,8 @@ Item{
             ColumnLayout{
                 spacing: dpi*10
                 Repeater{
-                    model: i2c_ad_list
-                    delegate: I2cDevice{address: i2c_ad_list[index]}
+                    model: i2c_ad_list.length
+                    I2cDevice{address: i2c_ad_list[index]}
                 }
             }
         }

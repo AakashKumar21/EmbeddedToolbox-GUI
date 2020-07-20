@@ -35,12 +35,10 @@ public:
     QByteArray getData();
 
 Q_INVOKABLE QVector<QString> getReadoutsAll();
-Q_INVOKABLE QByteArray getI2cAd();
+Q_INVOKABLE QVector<int> getI2cAd();
 
 signals:
     void NotifyData();
-    //    void NotifyConnected();
-    //    void NotifyDisconnected();
     void onClickRefresh();
     void onGpioDataRecv();
     void onNotifyDatRecv();
@@ -82,9 +80,9 @@ private:
     bool m_connected;
     int m_pinNo;
     QVector<QString> m_gpioData;
+    QVector<int> m_i2c_ad;
 
     QByteArray m_readData;
-    QByteArray m_i2c_ad;
     QTimer m_timer;
     QStringList m_portNameList;
 };
