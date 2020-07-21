@@ -284,10 +284,16 @@ void Serial::handleReadyRead()
         emit onNotifyDatRecv();
     }
 
+    static int new_i2c_cmd = false;
     if(byte1 == CMD_Scan)
     {
+        if(new_i2c_cmd) {
+            m_i2c_ad.clear();
+            new_i2c_cmd = false;
+        }
         if(byte3 == I2C_ScanEnd)
         {
+            new_i2c_cmd = true;
             emit i2cDevicesRecv();
         }
         m_i2c_ad.append(byte2);

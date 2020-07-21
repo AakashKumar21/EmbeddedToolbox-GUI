@@ -55,7 +55,7 @@ Item{
         x: dpi * 4
         anchors.top: i2c_box_basic_ctrl.bottom
         anchors.topMargin: dpi * 4
-        height: dpi * 30
+        height: dpi * 120
         width: app.width - dpi * 8
         title: "I2C Devices"
 
@@ -63,11 +63,12 @@ Item{
             height: parent.height
             width: parent.width
             clip: true
-            ColumnLayout{
-                spacing: dpi*10
+            Column{
+                spacing: dpi*5
                 Repeater{
                     model: i2c_ad_list.length
                     I2cDevice{address: i2c_ad_list[index]}
+
                 }
             }
         }

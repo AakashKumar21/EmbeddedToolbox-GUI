@@ -32,8 +32,8 @@ ApplicationWindow  {
 
         }
         onI2cDevicesRecv: {
+            i2c_ad_list = [];
             i2c_ad_list = serial.getI2cAd();
-            var tmp = serial.getI2cAd()
             console.log("Got I2c Devices");
         }
     }
